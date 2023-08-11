@@ -1,0 +1,1684 @@
+{
+    "devices": [
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "d2:55:9c:8f:77:35"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::d055:9cff:fe8f:7735"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654965460
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "2e:18:13:b7:88:96"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::2c18:13ff:feb7:8896"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654964916
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:2c"
+            ],
+            "ipv4": [
+                "10.0.0.44"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:2c"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655324212
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:11"
+            ],
+            "ipv4": [
+                "10.0.0.17"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:11"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:07",
+                    "port": "4"
+                }
+            ],
+            "lastSeen": 1691655583819
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "f6:03:76:f3:02:9b"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::f403:76ff:fef3:29b"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654964899
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "ba:12:99:08:6f:6d"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::b812:99ff:fe08:6f6d"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654964915
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "2a:0d:54:2b:f1:d8"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::280d:54ff:fe2b:f1d8"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654965529
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "9e:d9:87:29:e0:a4"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::9cd9:87ff:fe29:e0a4"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654964916
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:26"
+            ],
+            "ipv4": [
+                "10.0.0.38"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:26"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:07",
+                    "port": "4"
+                },
+                {
+                    "switch": "00:00:00:00:00:00:00:08",
+                    "port": "3"
+                }
+            ],
+            "lastSeen": 1691655585535
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:13"
+            ],
+            "ipv4": [
+                "10.0.0.19"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:13"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:02",
+                    "port": "14"
+                }
+            ],
+            "lastSeen": 1691655586360
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:23"
+            ],
+            "ipv4": [
+                "10.0.0.35"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:23"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:07",
+                    "port": "4"
+                },
+                {
+                    "switch": "00:00:00:00:00:00:00:08",
+                    "port": "3"
+                }
+            ],
+            "lastSeen": 1691655585535
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:22"
+            ],
+            "ipv4": [
+                "10.0.0.34"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:22"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:05",
+                    "port": "9"
+                }
+            ],
+            "lastSeen": 1691655307828
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "42:09:24:1d:80:4c"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::4009:24ff:fe1d:804c"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654965506
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "32:2a:45:84:36:2f"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::302a:45ff:fe84:362f"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654965548
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:24"
+            ],
+            "ipv4": [
+                "10.0.0.36"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:24"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:05",
+                    "port": "11"
+                }
+            ],
+            "lastSeen": 1691655307833
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "2e:94:a6:22:b3:4e"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::2c94:a6ff:fe22:b34e"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654965525
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:10"
+            ],
+            "ipv4": [
+                "10.0.0.16"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:10"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655324215
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:0b"
+            ],
+            "ipv4": [
+                "10.0.0.11"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:b"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:02",
+                    "port": "6"
+                }
+            ],
+            "lastSeen": 1691655586360
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:0d"
+            ],
+            "ipv4": [
+                "10.0.0.13"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:d"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:08",
+                    "port": "3"
+                },
+                {
+                    "switch": "00:00:00:00:00:00:00:07",
+                    "port": "4"
+                }
+            ],
+            "lastSeen": 1691655586796
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "56:9d:5a:2d:6e:b4"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::549d:5aff:fe2d:6eb4"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654965421
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:12"
+            ],
+            "ipv4": [
+                "10.0.0.18"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:12"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:02",
+                    "port": "13"
+                }
+            ],
+            "lastSeen": 1691655569981
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "66:2a:ac:0f:2d:a3"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::642a:acff:fe0f:2da3"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654965523
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "76:0d:86:f1:1e:9e"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::740d:86ff:fef1:1e9e"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654965453
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:25"
+            ],
+            "ipv4": [
+                "10.0.0.37"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:25"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:05",
+                    "port": "12"
+                }
+            ],
+            "lastSeen": 1691655324216
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "16:41:7b:e2:c8:4a"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::1441:7bff:fee2:c84a"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654965549
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "e6:d1:de:fc:75:0f"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::e4d1:deff:fefc:750f"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654965553
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:31"
+            ],
+            "ipv4": [
+                "10.0.0.49"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:31"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655455283
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:2f"
+            ],
+            "ipv4": [
+                "10.0.0.47"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:2f"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655260726
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:1e"
+            ],
+            "ipv4": [
+                "10.0.0.30"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:1e"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:03",
+                    "port": "15"
+                }
+            ],
+            "lastSeen": 1691655533752
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:33"
+            ],
+            "ipv4": [
+                "10.0.0.51"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:33"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655262772
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:17"
+            ],
+            "ipv4": [
+                "10.0.0.23"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:17"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:03",
+                    "port": "8"
+                }
+            ],
+            "lastSeen": 1691655553599
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:0f"
+            ],
+            "ipv4": [
+                "10.0.0.15"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:f"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655340599
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:18"
+            ],
+            "ipv4": [
+                "10.0.0.24"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:18"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:03",
+                    "port": "9"
+                }
+            ],
+            "lastSeen": 1691655533753
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:1b"
+            ],
+            "ipv4": [
+                "10.0.0.27"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:1b"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:03",
+                    "port": "12"
+                }
+            ],
+            "lastSeen": 1691655533754
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:2d"
+            ],
+            "ipv4": [
+                "10.0.0.45"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:2d"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655270970
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:20"
+            ],
+            "ipv4": [
+                "10.0.0.32"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:20"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:05",
+                    "port": "7"
+                }
+            ],
+            "lastSeen": 1691655324216
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:1c"
+            ],
+            "ipv4": [
+                "10.0.0.28"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:1c"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:03",
+                    "port": "13"
+                }
+            ],
+            "lastSeen": 1691655586359
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:1d"
+            ],
+            "ipv4": [
+                "10.0.0.29"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:1d"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:03",
+                    "port": "14"
+                }
+            ],
+            "lastSeen": 1691655455288
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:28"
+            ],
+            "ipv4": [
+                "10.0.0.40"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:28"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:05",
+                    "port": "15"
+                }
+            ],
+            "lastSeen": 1691655291444
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:21"
+            ],
+            "ipv4": [
+                "10.0.0.33"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:21"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:05",
+                    "port": "8"
+                }
+            ],
+            "lastSeen": 1691655534381
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:1a"
+            ],
+            "ipv4": [
+                "10.0.0.26"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:1a"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:03",
+                    "port": "11"
+                }
+            ],
+            "lastSeen": 1691655471668
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:34"
+            ],
+            "ipv4": [
+                "10.0.0.52"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:34"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655324215
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:29"
+            ],
+            "ipv4": [
+                "10.0.0.41"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:29"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655324216
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:14"
+            ],
+            "ipv4": [
+                "10.0.0.20"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:14"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:07",
+                    "port": "4"
+                },
+                {
+                    "switch": "00:00:00:00:00:00:00:08",
+                    "port": "3"
+                }
+            ],
+            "lastSeen": 1691655586796
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:1f"
+            ],
+            "ipv4": [
+                "10.0.0.31"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:1f"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:05",
+                    "port": "6"
+                }
+            ],
+            "lastSeen": 1691655534381
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:16"
+            ],
+            "ipv4": [
+                "10.0.0.22"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:16"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:03",
+                    "port": "7"
+                }
+            ],
+            "lastSeen": 1691655340596
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:30"
+            ],
+            "ipv4": [
+                "10.0.0.48"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:30"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655307828
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:27"
+            ],
+            "ipv4": [
+                "10.0.0.39"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:27"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:05",
+                    "port": "14"
+                }
+            ],
+            "lastSeen": 1691655324216
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:03"
+            ],
+            "ipv4": [
+                "10.0.0.3"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:3"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:01",
+                    "port": "8"
+                }
+            ],
+            "lastSeen": 1691655586360
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:0a"
+            ],
+            "ipv4": [
+                "10.0.0.10"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:a"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655324215
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:35"
+            ],
+            "ipv4": [
+                "10.0.0.53"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:35"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:08",
+                    "port": "1"
+                }
+            ],
+            "lastSeen": 1691655533726
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:2e"
+            ],
+            "ipv4": [
+                "10.0.0.46"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:2e"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655254580
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:0c"
+            ],
+            "ipv4": [
+                "10.0.0.12"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:c"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:02",
+                    "port": "7"
+                }
+            ],
+            "lastSeen": 1691655553593
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:06"
+            ],
+            "ipv4": [
+                "10.0.0.6"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:6"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655471668
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:15"
+            ],
+            "ipv4": [
+                "10.0.0.21"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:15"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:03",
+                    "port": "6"
+                }
+            ],
+            "lastSeen": 1691655569980
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:19"
+            ],
+            "ipv4": [
+                "10.0.0.25"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:19"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:03",
+                    "port": "10"
+                }
+            ],
+            "lastSeen": 1691655533753
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:2a"
+            ],
+            "ipv4": [
+                "10.0.0.42"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:2a"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:06",
+                    "port": "7"
+                }
+            ],
+            "lastSeen": 1691655553596
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:09"
+            ],
+            "ipv4": [
+                "10.0.0.9"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:9"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:01",
+                    "port": "14"
+                }
+            ],
+            "lastSeen": 1691655586360
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:0e"
+            ],
+            "ipv4": [
+                "10.0.0.14"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:e"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:02",
+                    "port": "9"
+                }
+            ],
+            "lastSeen": 1691655569981
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:07"
+            ],
+            "ipv4": [
+                "10.0.0.7"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:7"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:01",
+                    "port": "12"
+                }
+            ],
+            "lastSeen": 1691655586359
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:08"
+            ],
+            "ipv4": [
+                "10.0.0.8"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:8"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655324215
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "36:89:c6:d5:41:5c"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::3489:c6ff:fed5:415c"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691654993207
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:32"
+            ],
+            "ipv4": [
+                "10.0.0.50"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:32"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655455288
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:05"
+            ],
+            "ipv4": [
+                "10.0.0.5"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:5"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655307833
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:02"
+            ],
+            "ipv4": [
+                "10.0.0.2"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:2"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655270965
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:01"
+            ],
+            "ipv4": [
+                "10.0.0.1"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:1"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655324212
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:2b"
+            ],
+            "ipv4": [
+                "10.0.0.43"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:2b"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:06",
+                    "port": "8"
+                }
+            ],
+            "lastSeen": 1691655569977
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "00:00:00:00:00:04"
+            ],
+            "ipv4": [
+                "10.0.0.4"
+            ],
+            "ipv6": [
+                "fe80::200:ff:fe00:4"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655256629
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "46:ae:96:cc:13:17"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::44ae:96ff:fecc:1317"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655031071
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "7e:87:b0:1f:b6:5e"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::7c87:b0ff:fe1f:b65e"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:07",
+                    "port": "4"
+                },
+                {
+                    "switch": "00:00:00:00:00:00:00:08",
+                    "port": "3"
+                }
+            ],
+            "lastSeen": 1691655585744
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "8e:41:41:fe:a5:62"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::8c41:41ff:fefe:a562"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655031071
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "ee:ee:fc:c2:6a:80"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::ecee:fcff:fec2:6a80"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655030820
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "e2:b8:05:78:93:ba"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::e0b8:5ff:fe78:93ba"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:08",
+                    "port": "2"
+                }
+            ],
+            "lastSeen": 1691655586356
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "3a:00:97:14:c1:5a"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::3800:97ff:fe14:c15a"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655031067
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "ea:77:50:4b:86:83"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::e877:50ff:fe4b:8683"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [
+                {
+                    "switch": "00:00:00:00:00:00:00:07",
+                    "port": "4"
+                },
+                {
+                    "switch": "00:00:00:00:00:00:00:08",
+                    "port": "3"
+                }
+            ],
+            "lastSeen": 1691655586796
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "2e:fa:2d:6b:29:38"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::2cfa:2dff:fe6b:2938"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655547693
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "ee:d5:80:f1:6e:08"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::ecd5:80ff:fef1:6e08"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655547740
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "42:86:db:26:22:b9"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::4086:dbff:fe26:22b9"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655547679
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "46:1b:d3:ed:02:c1"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::441b:d3ff:feed:2c1"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655547248
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "72:7e:da:b6:3d:15"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::707e:daff:feb6:3d15"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655031071
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "26:b7:99:38:db:f5"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::24b7:99ff:fe38:dbf5"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655031071
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "de:82:da:22:90:64"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::dc82:daff:fe22:9064"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655542112
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "a6:44:41:9c:b2:51"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::a444:41ff:fe9c:b251"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655031071
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "a2:f4:05:07:b9:05"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::a0f4:5ff:fe07:b905"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655031071
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "1e:c1:50:47:1e:fd"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::1cc1:50ff:fe47:1efd"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655031070
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "7a:73:56:48:9b:03"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::7873:56ff:fe48:9b03"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655546475
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "6e:22:1b:7f:60:dd"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::6c22:1bff:fe7f:60dd"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655546042
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "ca:73:ed:62:59:5e"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::c873:edff:fe62:595e"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655542183
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "1a:93:e2:f5:2c:f5"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::1893:e2ff:fef5:2cf5"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655542242
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "c2:d3:f0:df:73:bd"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::c0d3:f0ff:fedf:73bd"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655542405
+        },
+        {
+            "entityClass": "DefaultEntityClass",
+            "mac": [
+                "b2:f0:97:3f:11:51"
+            ],
+            "ipv4": [],
+            "ipv6": [
+                "fe80::b0f0:97ff:fe3f:1151"
+            ],
+            "vlan": [
+                "0x0"
+            ],
+            "attachmentPoint": [],
+            "lastSeen": 1691655542439
+        }
+    ]
+}
