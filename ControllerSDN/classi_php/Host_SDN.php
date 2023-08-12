@@ -27,6 +27,11 @@ class Host_SDN
     public function Get_My_Switch(){
         return ($this->Attachment_List[0]->Switch_DPID);
     }
+
+    public function Get_Int_MAC(){
+        return hexdec($this->MAC_Addr);
+    } 
+
     public function Get_My_Switch_Port(){
         return ($this->Attachment_List[0]->Switch_Port);
     }

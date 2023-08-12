@@ -13,6 +13,10 @@ class Switch_SDN
         return substr($this->IP_Addr, 1, strpos($this->IP_Addr, ':') - 1);
     }
 
+    public function Get_Int_DPID(){
+        return hexdec($this->DPID);
+    }
+
     public function Print_Switch(){
         echo ("DPID => ".$this->DPID." <br> IP Address => ".$this->GetIPAddress()."<br><br>");
     }
@@ -24,6 +28,10 @@ class Switch_SDN
             return false;
         }
     }
+}
+
+function Comparatore_DPID($s1 , $s2){
+    return (($s1->Get_Int_DPID()) > ($s2->Get_Int_DPID()));
 }
 
 class CollegamentoInterSwitch{
@@ -43,5 +51,3 @@ class CollegamentoInterSwitch{
         $this->latenza = intval($lat);
     }
 }
-
-?>

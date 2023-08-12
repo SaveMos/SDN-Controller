@@ -1,27 +1,20 @@
 
 <?php
 
-function Dijkstra($graph, $source, $destination,  $NodiObbligati)
+function Dijkstra($graph, $source, $destination)
 {
+	/*
+	Complessità O(n) dove 'n' è il numero di Nodi.
+
+	Implementazione dell'algoritmo di Dijkstra che lavora su una matrice che rappresenta la topologia della rete.
+		Se graph[i][j] = k => Il percorso dal nodo i al nodo j costa k.
+		Se graph[i][j] = 99999 => Il percorso dal nodo i al nodo j non esiste.
+	*/
+
 	// https://codereview.stackexchange.com/questions/75641/dijkstras-algorithm-in-php
 	//the start and the end
 	$a = $source;
 	$b = $destination;
-
-	/*
-	$dim_graph = count($graph[0]);
-	$dim_NO = count($NodiObbligati);
-
-	$graph_backup = $graph;
-
-	for ($j = 0; $j < $dim_NO; $j++) {
-		for ($i = 0; $i < $dim_graph; $i++) {
-			$graph[$NodiObbligati[$j]][$i] = -99;
-			$graph[$i][$NodiObbligati[$j]] = -99;
-		}
-	}
-	*/
-
 
 	//initialize the array for storing
 	$S = array(); //the nearest path with its parent and weight
@@ -29,33 +22,16 @@ function Dijkstra($graph, $source, $destination,  $NodiObbligati)
 	foreach (array_keys($graph) as $val) $Q[$val] = 99999;
 	$Q[$a] = 0;
 
-	//$AlreadySeen = array();
-	//$count = 0;
-	//$AlreadySeen[$count] = $a;
 	//start calculating
 	while (!empty($Q)) {
-
 		$min = array_search(min($Q), $Q); //the most min weight
-
 		if ($min == $b) break;
-
-		foreach ($graph[$min] as $key => $val) {
-			if (!empty($Q[$key]) && $Q[$min] + $val < $Q[$key]) {
-				$Q[$key] = $Q[$min] + $val;
-				$S[$key] = array($min, $Q[$key]);
-			}
+		foreach ($graph[$min] as $key => $val) if (!empty($Q[$key]) && $Q[$min] + $val < $Q[$key]) {
+			$Q[$key] = $Q[$min] + $val;
+			$S[$key] = array($min, $Q[$key]);
 		}
-
 		unset($Q[$min]);
 	}
-
-	/*
-	if (!array_key_exists($b, $S)) {
-		echo "Found no way.";
-		return;
-	}
-	*/
-
 
 	//list the path
 	$path = array();
@@ -67,108 +43,86 @@ function Dijkstra($graph, $source, $destination,  $NodiObbligati)
 	$path[] = $a;
 	$path = array_reverse($path);
 
-	echo "<br />From $a to $b";
-	//echo "<br />The length is ".$S[$b][1];
-	echo "<br />Path is " . implode('->', $path) . "<br>";
+	//print result
+	/*
+	echo "<br />Sorgente: $a <br> Destinazione: $b";
+	echo "<br />Lunghezza del Percorso: " . $S[$b][1];
+	echo "<br />Il percorso è [" . implode(' => ', $path) . "] <br><br>";
+	*/
 
 	return $path;
 }
 
+function Print_Path($path , $source , $destination){
+	echo "<br />Sorgente: $source <br> Destinazione: $destination";
+	echo "<br />Il percorso e' [" . implode(' => ', $path) . "] <br><br>";
+}
 
-function Dijkstra2($graph, $source, $destination,  $NodiObbligati)
-{
-	$MAX_VALUE = 99999;
+function SPF($graph, $source, $destination , $Not_Optional_Nodes){
 	/*
-	if($source == $destination){
-		$ret = array(1 => $source);
-		return $ret;
-	}
+	$Not_Optional_Nodes è un array che contiene i nodi da cui il 
+	percorso deve passare per forza a prescindere dal costo.
+
+	SPF() restituirà un array che contiene il percorso di costo minimo da source a destination 
+	il quale passa anche per i nodi inclusi in $Not_Optional_Nodes.
+
+	Supponiamo che $Not_Optional_Nodes = [a , b]
+
+	SPF eseguirà:
+		1) Dijkstra($graph, $source, a)
+		2) Dijkstra($graph, a , b)
+		3) Dijkstra($graph, b , destination)
+
+	Quindi l'ordine con cui sono inseriti i nodi in $Not_Optional_Nodes NON DEVE ESSERE CASUALE.
+	
 	*/
 
-	$n = count($graph[0]); // Numero dei Nodi
+	$Num_Not_Opt = count($Not_Optional_Nodes);
 
-	$N_vis = array();
-	$N = array(); // Vettori dei Nodi da estrarre
-	$K = array(); // vettore delle Etichette
-	$P = array(); // Vettore dei Predecessori
-
-	//Inizializzazione dei Vettori
-	for ($i = 0; $i < $n; $i++) {
-		$N[$i] = $i;
-		if ($i == $source) {
-			$K[$i] = 0;
-			$P[$i] = 1;
-		} else {
-			$K[$i] = $MAX_VALUE;
-			$P[$i] = -1;
-		}
+	if(
+		($Num_Not_Opt == 0) || 
+		(($Num_Not_Opt == 1) && ($Not_Optional_Nodes[0] == $source || $Not_Optional_Nodes[0] == $destination))
+	){
+		// Non ho vincoli, calcolo Dijkstra normalmente.
+		return Dijkstra($graph , $source , $destination);
 	}
 
-	while (true) {
-		//Estrazione del Nodo con Etichetta Minima.
-		$nodo_estratto = EstraiIndiceConValoreMinimo($K);
+	if($Num_Not_Opt == 1){
+		$Paths = array(); // tutti i percorsi parziali che poi alla fine verranno uniti
 
-		// Calcolo la "Stella uscente"
-		// ossia i nodi raggiungibili con archi che partono dal nodo estratto.
-		$Fs = CostruisciStellaUscente($nodo_estratto, $graph[$nodo_estratto]);
+		$Paths[0] = Dijkstra($graph , $source , $Not_Optional_Nodes[0]);
+		array_pop($Paths[0]);
+		$Paths[1] = Dijkstra($graph , $Not_Optional_Nodes[0] , $destination);
 
-		$Dim_Fs = count($Fs);
-
-		$K_nodo = $K[$nodo_estratto];
-
-		for ($i = 0; $i < $Dim_Fs; $i++) {
-			$K_j = $K[$Fs[$i]]; // Valore dell'etichetta del nodo $Fs[$i]
-			$C_i_j = $graph[$nodo_estratto][$Fs[$i]];
-
-			if($K_j > $K_nodo + $C_i_j){
-				// Aggiornamento
-				$K[$Fs[$i]] = $K_nodo + $C_i_j;
-				$P[$Fs[$i]] = $nodo_estratto;
-			}
-		}
-
-		break;
+		return array_merge($Paths[0] , $Paths[1]);
 	}
-}
 
-function EstraiIndiceConValoreMinimo($arr)
-{
-	$min = $arr[0];
-	$ret = 0;
-	$n = count($arr);
+	// Caso Generico
 
-	if ($n == 1) return 0;
+	$Paths = array(); // tutti i percorsi parziali che poi alla fine verranno uniti
 
-	for ($i = 1; $i < $n; $i++) {
-		if($arr[$i] < 0){
-			continue;
-		}
-		if ($arr[$i] < $min) {
-			$min = $arr[$i];
-			$ret = $i;
-		}
+	// Primo path parziale
+	$Paths[0] = Dijkstra($graph , $source , $Not_Optional_Nodes[0]);
+	array_pop($Paths[0]); 
+
+	for($i = 1 ; $i < $Num_Not_Opt ; $i++){
+		$Paths[$i] = Dijkstra($graph , $Not_Optional_Nodes[$i - 1], $Not_Optional_Nodes[$i]);
+		array_pop($Paths[$i]); 
+		// elimino l'ultimo elemento del Path, in modo tale che al termine 
+		// posso fare facilmente la congiunzione dei percorsi parziali
+	}
+
+	// Ultimo path parziale
+	$Paths[$Num_Not_Opt] = Dijkstra($graph , $Not_Optional_Nodes[$Num_Not_Opt - 1] , $destination);
+
+	$ret = $Paths[0];
+	for($i = 1; $i <= ($Num_Not_Opt); $i++){
+		$ret = array_merge($ret , $Paths[$i]);
 	}
 
 	return $ret;
 }
 
-function CostruisciStellaUscente($Indice_Nodo_Sorgente, $riga_nodo_scelto)
-{
-	$n = count($riga_nodo_scelto);
-
-	$ret = array();
-	for ($i = 0; $i < $n; $i++) {
-		if ($riga_nodo_scelto[$i] != '-' && $i != $Indice_Nodo_Sorgente) {
-			array_push($ret, $i);
-		}
-	}
-
-	return $ret;
-}
-
-// array_search
-
-// array_push --> Inserimento in coda
 
 ?>
 

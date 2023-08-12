@@ -1,0 +1,72 @@
+
+.greater_option_cointainer {
+    display: block;
+    width: 95%;
+    height: fit-content;
+    font-size: medium;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.input_action_container{
+    margin-left: 2vh;
+    margin-bottom: 5vh;
+    display: inline-block;
+    width: fit-content;
+    font-family: 'Courier New', Courier, monospace;
+
+}
+
+.option_container {
+    height: 80px;
+    margin-left: 2vh;
+    margin-right: 2vh;
+ 
+}
+
+.input_field_container{
+    background-color: rgb(238, 227, 206);
+    width: fit-content;
+    padding: 20px;
+    height: fit-content;
+    display: inline-block;
+}
+
+
+.ACL_button {
+    height: fit-content;
+    width: fit-content;
+    font-size: 2.6vh;
+    margin-right: 2vh;
+    margin-top: 29px;
+    display: inline;
+    cursor: pointer;
+}
+
+
+.IP_address_input_container{
+    margin-top: 2vh;
+    margin-left: 2vh;
+    width: fit-content;
+    height: fit-content;
+    display: inline-block;
+
+}
+.IP_Addr_Number_input{ 
+    width: 40px;
+    display: inline;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.Rule_Number_input{
+    width: 70px;
+    display: inline;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#check_box_container_interno{
+    border: 2px dotted black;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    display: inline-block;
+}

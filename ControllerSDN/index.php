@@ -2,23 +2,30 @@
 
 require_once("librerie_php/REST_API_Library.php");
 require_once("librerie_php/Dijkstra_Library.php");
+require_once("librerie_php/Algoritmi_Vari.php");
+
 require_once("classi_php/Switch_SDN.php");
 require_once("classi_php/Host_SDN.php");
 
+session_start();
+
 $CONTROLLER_IP = "192.168.1.30";
 
-//print_r($DeviceList['devices']);
-
 //$DeviceList['devices'][0]->mac[0]
+
+// Creazione della SwitchList, ossia la lista degli switch nella rete.
 $SwitchList = json_decode(getSwitchList($CONTROLLER_IP));
 $SwitchListDim = count($SwitchList);
 
 $SwitchList_Definitive = array();
 for ($i = 0; $i < $SwitchListDim; $i++) {
     $SwitchList_Definitive[$i] = new Switch_SDN($SwitchList[$i]->switchDPID, $SwitchList[$i]->inetAddress);
-    //$SwitchList_Definitive[$i]->Print_Switch();
 }
 
+// Ordinamento della Switch list in senso crescente in base al DPID.
+usort($SwitchList_Definitive , 'Comparatore_DPID');
+
+// Creazione della lista dei collegamenti InterSwitch, ossia link che collegano due switch tra loro.
 $InterSwitchLinkList = getInterSwitchLinkList($CONTROLLER_IP);
 $InterSwitchLinkList = str_replace('-', '_', $InterSwitchLinkList);
 // Nel json i nomi degli attributi contenevano il '-' il quale mandava in confusione il sistema
@@ -62,10 +69,10 @@ for ($i = 0; $i < $Num_Element; $i++) {
     $cleanDeviceList[$cleanDeviceList_Dim] = $DeviceList['devices'][$i];
     $cleanDeviceList_Dim++;
 }
-echo "Sono stati rilevati " . $cleanDeviceList_Dim . " dispositivi Host validi. <br>";
 
 $DeviceList_Definitiva = array();
 
+// Creazione della Device List, ossia la Lista degli Host.
 for ($i = 0; $i < $cleanDeviceList_Dim; $i++) {
     $DeviceList_Definitiva[$i] = new Host_SDN(
         $cleanDeviceList[$i]->mac[0],
@@ -76,6 +83,7 @@ for ($i = 0; $i < $cleanDeviceList_Dim; $i++) {
     );
 }
 
+// Creazione della matrice di rappresentazione della topologia della rete.
 $graph = array();
 for ($i = 0; $i < $SwitchListDim; $i++) {
     $graph[$i] = array();
@@ -100,25 +108,14 @@ for ($i = 0; $i < $SwitchListDim; $i++) {
     }
 }
 
-//PrintMatrix($graph, $SwitchListDim);
 
-for ($i = 0; $i < $SwitchListDim; $i++) {
-    echo "[" . $i . "]  " . $SwitchList_Definitive[$i]->DPID . "<br>";
-}
+$_SESSION["grafo"] = $graph;
+$_SESSION["SwitchList"] = $SwitchList_Definitive;
+$_SESSION["DeviceList"] = $DeviceList_Definitiva;
+$_SESSION["SwitchLinkList"] = $InterSwitchLinkList_Definitive;
 
-$NodiObbligati = [2];
-
-/*
-Dijkstra($graph, 1, 1, $NodiObbligati);
-Dijkstra($graph, 1, 5, $NodiObbligati);
-Dijkstra($graph, 3, 4, $NodiObbligati);
-Dijkstra($graph, 2, 1, $NodiObbligati);
-Dijkstra($graph, 5, 2, $NodiObbligati);
-*/
-
-Dijkstra2($graph, 1, 3, $NodiObbligati);
-
-//PrintMatrix($graph, $SwitchListDim , $SwitchList_Definitive);
+// $Nodi_Obbligati = [1 , 3];
+// Print_Path(SPF($graph, 2, 4, $Nodi_Obbligati) , 2 , 4);
 
 ?>
 
@@ -138,6 +135,8 @@ Dijkstra2($graph, 1, 3, $NodiObbligati);
     <h1>SDN Configurator</h1>
     <p>Cosa vorresti fare?</p>
 
+    <p> <a class="option_link" href="php_scripts/ModificaFlusso.php">Modifica un Flusso</a> </p>
+
     <p> <a class="option_link" href="php_scripts/ModificaACL.php">Modifica una ACL</a> </p>
 
     <p> <a class="option_link" href="php_scripts/ModificaFW.php">Modifica il Firewall</a> </p>
@@ -148,6 +147,14 @@ Dijkstra2($graph, 1, 3, $NodiObbligati);
 </html>
 
 <?php
+
+
+echo "<br>########################### INFO ########################### <br><br>";
+
+echo "Sono stati rilevati " . $cleanDeviceList_Dim . " dispositivi Host validi. <br>";
+
+echo "<br>############################################################ <br><br>";
+
 
 
 // Funzioni
@@ -164,6 +171,8 @@ function PrintMatrix($matr, $dim)
 
 function Search_InterSwitch_Link($s1, $s2, $linkList)
 {
+    $No_Link = 99999;
+
     $num = count($linkList);
     for ($i = 0; $i < $num; $i++) {
         if (
@@ -174,7 +183,7 @@ function Search_InterSwitch_Link($s1, $s2, $linkList)
             return $linkList[$i]->latenza;
         }
     }
-    return '-';
+    return $No_Link;
 }
 
 
