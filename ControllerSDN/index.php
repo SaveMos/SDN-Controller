@@ -114,8 +114,8 @@ $_SESSION["SwitchList"] = $SwitchList_Definitive;
 $_SESSION["DeviceList"] = $DeviceList_Definitiva;
 $_SESSION["SwitchLinkList"] = $InterSwitchLinkList_Definitive;
 
-// $Nodi_Obbligati = [1 , 3];
-// Print_Path(SPF($graph, 2, 4, $Nodi_Obbligati) , 2 , 4);
+ //$Nodi_Obbligati = [1 , 3];
+ //Print_Path(SPF($graph, 2, 4, $Nodi_Obbligati) , 2 , 4);
 
 ?>
 

@@ -24,6 +24,8 @@ class Host_SDN
         }   
     }
 
+  
+
     public function Get_My_Switch(){
         return ($this->Attachment_List[0]->Switch_DPID);
     }
@@ -36,6 +38,20 @@ class Host_SDN
         return ($this->Attachment_List[0]->Switch_Port);
     }
 }
+
+function SearchHostByIPAddr($Host_SDN_array , $ipv4_addr){
+    $c = count($Host_SDN_array);
+    if($c == 0){
+        return -1;
+    }
+    for($i = 0 ; $i < $c ; $i++){
+        if(get_object_vars($Host_SDN_array[$i])['IPv4_Addr'] == $ipv4_addr){
+            return $i;
+        }
+    }
+    return -1;
+}
+
 
 class Collegamento_Host_Switch
 {

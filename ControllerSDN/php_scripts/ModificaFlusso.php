@@ -20,7 +20,7 @@ session_start();
 
     <div class="greater_option_cointainer">
 
-        <form action="AddFlux.php" class="option_container" method="get" id="Insert_Flux_Form" name="Insert_Flux_Form">
+        <form action="AddFlux.php" class="option_container" method="post" id="Insert_Flux_Form" name="Insert_Flux_Form">
 
             <div class="input_field_container">
                 <label>Indirizzo IP Sorgente:</label>
@@ -45,6 +45,9 @@ session_start();
                     <input id="Sorg_Subnet_Mask_3" name="Sorg_Subnet_Mask_3" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span>.</span>
                     <input id="Sorg_Subnet_Mask_4" name="Sorg_Subnet_Mask_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
+                    <span> </span>
+                    <input class = 'Mask_CheckBox' type='checkbox' id='MaskCheckBox_Sorg' name='MaskCheckBox_Sorg'>
+                    <label for='MaskCheckBox_Sorg'>Host</label> 
                 </div>
 
                 <br><br>
@@ -57,7 +60,7 @@ session_start();
                     <span>.</span>
                     <input id="Dest_IP_Addr_3" name="Dest_IP_Addr_3" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span>.</span>
-                    <input id="Dest_IP_Addr_4" name="Dest_IP_Addr_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
+                    <input id="Dest_IP_Addr_4" name="Dest_IP_Addr_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">                   
                 </div>
 
                 <br>
@@ -71,6 +74,9 @@ session_start();
                     <input id="Dest_Subnet_Mask_3" name="Dest_Subnet_Mask_3" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span>.</span>
                     <input id="Dest_Subnet_Mask_4" name="Dest_Subnet_Mask_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
+                    <span> </span>
+                    <input class = 'Mask_CheckBox' type='checkbox' id='MaskCheckBox_Dest' name='MaskCheckBox_Dest'>
+                    <label for='MaskCheckBox_Dest'>Host</label> 
                 </div>
             </div>
 
@@ -90,7 +96,6 @@ session_start();
                 echo "<div id='check_box_container_interno'>";
 
                 $SwitchList = $_SESSION["SwitchList"];
-
                 $num_switch = count($_SESSION["SwitchList"]);
 
                 for ($i = 0; $i < $num_switch; $i++) {
@@ -102,12 +107,8 @@ session_start();
                 }
 
                 echo "</div>";
-                //print_r(get_object_vars($SwitchList[1])['DPID']);
 
-                //
-
-                //   <input class = "Switch_CheckBox" type="checkbox" id="switch_check2" name="switch_check2"> <label for="switch_check2">b</label> <br>
-
+                echo "<input type='hidden' id='PositionArray' name='PositionArray'>";
                 ?>
             </div>
 
