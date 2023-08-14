@@ -51,4 +51,27 @@ class CollegamentoInterSwitch{
         $this->bidirezionale = $flag;
         $this->latenza = intval($lat);
     }
+
+    
+}
+
+function Get_Ports_to_these_Switch($SwitchList , $dpid1 , $dpid2){
+    $c = count($SwitchList);
+    if($c > 1){
+    
+        for($i = 0 ; $i < $c ; $i++){
+            $t = fixObject($SwitchList[$i]);
+
+            if($t->srg_DPID == $dpid1 && $t->dst_DPID == $dpid2){
+                return [$t->srg_port , $t->dst_port];
+            }
+
+            if($t->srg_DPID == $dpid2 && $t->dst_DPID == $dpid1){
+                return [ $t->dst_port , $t->srg_port];
+            }
+        }
+    
+        
+    }
+    return [-1 , -1];
 }

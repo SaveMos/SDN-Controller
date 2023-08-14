@@ -15,6 +15,19 @@ session_start();
 
 
 <body onload="EventHandler()">
+    <?php
+        if(isset($_SESSION["esito"])){
+            if($_SESSION["esito"] == 1){
+                echo "<p class='infoImportante2'> Regola aggiunta con Successo!</p>";
+            }else{
+                echo "<p class='infoImportante'> Inserimento Regola Fallito! ".$_SESSION['esito_msg']."</p>";
+            }
+
+            $_SESSION["esito"] = null;
+            
+        }
+    ?>
+
     <p> <a class="option_link" href="../index.php">Home</a> </p>
     <h1>Configuratore di Flusso</h1>
 
@@ -46,8 +59,8 @@ session_start();
                     <span>.</span>
                     <input id="Sorg_Subnet_Mask_4" name="Sorg_Subnet_Mask_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span> </span>
-                    <input class = 'Mask_CheckBox' type='checkbox' id='MaskCheckBox_Sorg' name='MaskCheckBox_Sorg'>
-                    <label for='MaskCheckBox_Sorg'>Host</label> 
+                    <input class='Mask_CheckBox' type='checkbox' id='MaskCheckBox_Sorg' name='MaskCheckBox_Sorg'>
+                    <label for='MaskCheckBox_Sorg'>Host</label>
                 </div>
 
                 <br><br>
@@ -60,7 +73,7 @@ session_start();
                     <span>.</span>
                     <input id="Dest_IP_Addr_3" name="Dest_IP_Addr_3" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span>.</span>
-                    <input id="Dest_IP_Addr_4" name="Dest_IP_Addr_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">                   
+                    <input id="Dest_IP_Addr_4" name="Dest_IP_Addr_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                 </div>
 
                 <br>
@@ -75,23 +88,32 @@ session_start();
                     <span>.</span>
                     <input id="Dest_Subnet_Mask_4" name="Dest_Subnet_Mask_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span> </span>
-                    <input class = 'Mask_CheckBox' type='checkbox' id='MaskCheckBox_Dest' name='MaskCheckBox_Dest'>
-                    <label for='MaskCheckBox_Dest'>Host</label> 
+                    <input class='Mask_CheckBox' type='checkbox' id='MaskCheckBox_Dest' name='MaskCheckBox_Dest'>
+                    <label for='MaskCheckBox_Dest'>Host</label>
                 </div>
             </div>
 
-            <br>
+            <h3 class='info1'>Altre Opzioni</h3>
+            <div id="other_option_container">
+
+                <label for='Other_Option_Bidirezionale_check'> Bidirezionale </label>
+                <input class='Other_Option_CheckBox' type='checkbox' id='Other_Option_Bidirezionale_check' name='Other_Option_Bidirezionale_check'>
+                
+                <br><br>
+                <label for='Other_Option_Bidirezionale_check'> Priorità</label>
+                <input class='Other_Option_CheckBox' type='number' id='priority_flux' name = 'priority_flux' value="32768" max="32768" min="0">
+
+            </div>
 
             <div id="check_box_container" name="check_box_container">
 
                 <?php
                 echo "<h3 class='info1'>Seleziona gli Switch da cui desideri far passare il flusso.</h3>";
-                echo "<div id='check_box_container_interno'>";
-                echo "<p class='infoImportante'>NOTA BENE!</p>";
-                echo "<p class='info2'>L'ordine con cui selezioni gli switch è importante, 
+                echo "<div id='info_container'>";
+                echo "<p class='infoImportante'>NOTA BENE! L'ordine con cui selezioni gli switch è importante, 
                     quindi spunta le checkbox degli switch nello stesso ordine con cui vorresti far passare i pacchetti</p>";
                 echo "</div>";
-                echo "<p class='info3'> DPID degli Switch attualmente Online:<p>";
+                echo "<p class='info2'> DPID degli Switch attualmente online:</p>";
 
                 echo "<div id='check_box_container_interno'>";
 
@@ -101,7 +123,7 @@ session_start();
                 for ($i = 0; $i < $num_switch; $i++) {
                     $s_i = get_object_vars($SwitchList[$i]);
                     echo "<input class = 'Switch_CheckBox' type='checkbox' id='switch_check$i' name='switch_check$i'> 
-                        <label for='switch_check$i'>" . $s_i['DPID'] . "</label> 
+                        <label class='Switch_CheckBox_label' for='switch_check$i'>" . $s_i['DPID'] . "</label> 
                         <span class = 'Switch_CheckBoxPos' id='switch_checkPos$i' name='switch_checkPos$i' >-</span>
                         <br>";
                 }
@@ -112,11 +134,12 @@ session_start();
                 ?>
             </div>
 
-            <input id="insertACLButton" name="insertACLButton" class="ACL_button" type="submit" value="Avvia">
+            <input id="insertFluxButton" name="insertFluxButton" class="Flux_button" type="submit" value="Aggiungi Flusso">
         </form>
     </div>
 
-
+    <br>
+    <br>
 
 
 </body>

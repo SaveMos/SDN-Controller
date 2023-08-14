@@ -7,9 +7,16 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
+#other_option_container{
+    font-size: medium;
+    border: 2px dotted black;
+    padding: 1%;
+    width: fit-content;
+}
+
 .input_action_container{
     margin-left: 2vh;
-    margin-bottom: 5vh;
+    margin-bottom: 2vh;
     display: inline-block;
     width: fit-content;
     font-family: 'Courier New', Courier, monospace;
@@ -32,7 +39,7 @@
 }
 
 
-.ACL_button {
+.Flux_button {
     height: fit-content;
     width: fit-content;
     font-size: 2.6vh;
@@ -40,13 +47,13 @@
     margin-top: 29px;
     display: inline;
     cursor: pointer;
+    margin-bottom: 4%;
 }
 
 
 .IP_address_input_container{
     margin-top: 2vh;
     margin-left: 2vh;
-    width: fit-content;
     height: fit-content;
     display: inline-block;
 
@@ -67,6 +74,35 @@
     border: 2px dotted black;
     width: fit-content;
     height: fit-content;
-    padding: 10px;
+    padding: 1%;
+    padding-right: 3%;
     display: inline-block;
+}
+
+.Switch_CheckBox_label{
+    font-size: medium;
+    font-weight: normal;
+
+}
+
+.info_container{
+    border: 2px dotted black;
+    width: fit-content;
+    height: fit-content;
+    display: inline-block;
+    padding: 1%;
+
+}
+
+.infoImportante{
+    color: rgb(173, 10, 10);
+    font-size: small;
+    font-style: italic;
+}
+
+
+.infoImportante2{
+    color: rgb(12, 194, 27);
+    font-size: small;
+    font-style: italic;
 }

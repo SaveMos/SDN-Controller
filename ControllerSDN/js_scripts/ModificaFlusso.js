@@ -38,77 +38,88 @@ function clickCheckBox() {
 }
 
 function Update_Positions() {
-
-    // const n = (document.getElementsByClassName("Switch_CheckBox")).length;
-
-    var Checks = document.querySelectorAll('.Switch_CheckBoxPos');
+    var Checks = 0, inde = 0 , i = 0;
+    
+    Checks = document.querySelectorAll('.Switch_CheckBoxPos');
     Checks.forEach(check => {
         check.innerHTML = '-';
     });
 
-    var c = 0;
-    for (var i = 0; i < Position.length; i++) {
+    for (i = 0; i < Position.length; i++) {
         inde = Position[i];
-        c = document.getElementById("switch_checkPos" + inde);
-        c.innerText = (i + 1);
+        Checks = document.getElementById("switch_checkPos" + inde);
+        Checks.innerText = (i + 1) + '°';   
     }
 
     (document.getElementById("PositionArray")).value = JSON.stringify(Position);
     // Carico Position in un campo input per poi passarlo al PHP tramite metodo POST.
 }
 
+var Valori_Precedenti_Sorgente = [0, 0, 0, 0];
+var Valori_Precedenti_Destinatario = [0, 0, 0, 0];
+
 function clickMaskCheckBox() {
-    var c = this.name;
+    if (this.name == "MaskCheckBox_Dest") {
 
-    if (c == "MaskCheckBox_Dest") {
-        var a = 0, b = 0;
-        a = (document.getElementById("Dest_Subnet_Mask_1")).readOnly;
+        if (((document.getElementById("Dest_Subnet_Mask_1")).readOnly) == false) {
 
-        if (a == false) b = 255;
-        else b = 0;
+            Valori_Precedenti_Destinatario[0] = (document.getElementById("Dest_Subnet_Mask_1")).value;
+            Valori_Precedenti_Destinatario[1] = (document.getElementById("Dest_Subnet_Mask_2")).value;
+            Valori_Precedenti_Destinatario[2] = (document.getElementById("Dest_Subnet_Mask_3")).value;
+            Valori_Precedenti_Destinatario[3] = (document.getElementById("Dest_Subnet_Mask_4")).value;
 
-        (document.getElementById("Dest_Subnet_Mask_1")).value = b;
-        (document.getElementById("Dest_Subnet_Mask_2")).value = b;
-        (document.getElementById("Dest_Subnet_Mask_3")).value = b;
-        (document.getElementById("Dest_Subnet_Mask_4")).value = b;
+            (document.getElementById("Dest_Subnet_Mask_1")).value = 255;
+            (document.getElementById("Dest_Subnet_Mask_2")).value = 255;
+            (document.getElementById("Dest_Subnet_Mask_3")).value = 255;
+            (document.getElementById("Dest_Subnet_Mask_4")).value = 255;
 
-        if (a == true) {
-            (document.getElementById("Dest_Subnet_Mask_1")).removeAttribute("readonly");
-            (document.getElementById("Dest_Subnet_Mask_2")).removeAttribute("readonly");
-            (document.getElementById("Dest_Subnet_Mask_3")).removeAttribute("readonly");
-            (document.getElementById("Dest_Subnet_Mask_4")).removeAttribute("readonly");
-        } else {
             (document.getElementById("Dest_Subnet_Mask_1")).setAttribute("readonly", true);
             (document.getElementById("Dest_Subnet_Mask_2")).setAttribute("readonly", true);
             (document.getElementById("Dest_Subnet_Mask_3")).setAttribute("readonly", true);
             (document.getElementById("Dest_Subnet_Mask_4")).setAttribute("readonly", true);
+
+        } else {
+            (document.getElementById("Dest_Subnet_Mask_1")).value = Valori_Precedenti_Destinatario[0];
+            (document.getElementById("Dest_Subnet_Mask_2")).value = Valori_Precedenti_Destinatario[1];
+            (document.getElementById("Dest_Subnet_Mask_3")).value = Valori_Precedenti_Destinatario[2];
+            (document.getElementById("Dest_Subnet_Mask_4")).value = Valori_Precedenti_Destinatario[3];
+
+            (document.getElementById("Dest_Subnet_Mask_1")).removeAttribute("readonly");
+            (document.getElementById("Dest_Subnet_Mask_2")).removeAttribute("readonly");
+            (document.getElementById("Dest_Subnet_Mask_3")).removeAttribute("readonly");
+            (document.getElementById("Dest_Subnet_Mask_4")).removeAttribute("readonly");
         }
 
     } else {
-        var a = 0, b = 0;
-        a = (document.getElementById("Sorg_Subnet_Mask_1")).readOnly;
 
-        if (a == false) b = 255;
-        else b = 0;
+        if (((document.getElementById("Sorg_Subnet_Mask_1")).readOnly) == false) {
 
-        (document.getElementById("Sorg_Subnet_Mask_1")).value = b;
-        (document.getElementById("Sorg_Subnet_Mask_2")).value = b;
-        (document.getElementById("Sorg_Subnet_Mask_3")).value = b;
-        (document.getElementById("Sorg_Subnet_Mask_4")).value = b;
+            Valori_Precedenti_Sorgente[0] = (document.getElementById("Sorg_Subnet_Mask_1")).value;
+            Valori_Precedenti_Sorgente[1] = (document.getElementById("Sorg_Subnet_Mask_2")).value;
+            Valori_Precedenti_Sorgente[2] = (document.getElementById("Sorg_Subnet_Mask_3")).value;
+            Valori_Precedenti_Sorgente[3] = (document.getElementById("Sorg_Subnet_Mask_4")).value;
 
-        if (a == true) {
-            (document.getElementById("Sorg_Subnet_Mask_1")).removeAttribute("readonly");
-            (document.getElementById("Sorg_Subnet_Mask_2")).removeAttribute("readonly");
-            (document.getElementById("Sorg_Subnet_Mask_3")).removeAttribute("readonly");
-            (document.getElementById("Sorg_Subnet_Mask_4")).removeAttribute("readonly");
-        } else {
+            (document.getElementById("Sorg_Subnet_Mask_1")).value = 255;
+            (document.getElementById("Sorg_Subnet_Mask_2")).value = 255;
+            (document.getElementById("Sorg_Subnet_Mask_3")).value = 255;
+            (document.getElementById("Sorg_Subnet_Mask_4")).value = 255;
+
             (document.getElementById("Sorg_Subnet_Mask_1")).setAttribute("readonly", true);
             (document.getElementById("Sorg_Subnet_Mask_2")).setAttribute("readonly", true);
             (document.getElementById("Sorg_Subnet_Mask_3")).setAttribute("readonly", true);
             (document.getElementById("Sorg_Subnet_Mask_4")).setAttribute("readonly", true);
+
+        } else {
+            (document.getElementById("Sorg_Subnet_Mask_1")).value = Valori_Precedenti_Sorgente[0];
+            (document.getElementById("Sorg_Subnet_Mask_2")).value = Valori_Precedenti_Sorgente[1];
+            (document.getElementById("Sorg_Subnet_Mask_3")).value = Valori_Precedenti_Sorgente[2];
+            (document.getElementById("Sorg_Subnet_Mask_4")).value = Valori_Precedenti_Sorgente[3];
+
+            (document.getElementById("Sorg_Subnet_Mask_1")).removeAttribute("readonly");
+            (document.getElementById("Sorg_Subnet_Mask_2")).removeAttribute("readonly");
+            (document.getElementById("Sorg_Subnet_Mask_3")).removeAttribute("readonly");
+            (document.getElementById("Sorg_Subnet_Mask_4")).removeAttribute("readonly");
         }
-
-
     }
 }
 

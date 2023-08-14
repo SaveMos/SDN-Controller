@@ -5,3 +5,18 @@
     font-size: 2.6vh;
     margin-left: 2vh;
 }
+
+
+.IP_address_input_container{
+    margin-top: 2vh;
+    margin-left: 2vh;
+    width: fit-content;
+    height: fit-content;
+    display: inline-block;
+
+}
+.IP_Addr_Number_input{ 
+    width: fit-content;
+    display: inline;
+    font-family: 'Courier New', Courier, monospace;
+}
