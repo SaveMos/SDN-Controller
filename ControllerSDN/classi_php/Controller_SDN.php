@@ -46,6 +46,17 @@ class Controller_SDN
 			$result = file_get_contents($url);
 		}
 
+		if ($method == "CANCELLA") {
+			// Cancella è equivalente a DELETE, ma non è keyword di php
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE'); // curl_setopt($ch, CURLOPT_PUT, true); - for PUT
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+			curl_setopt($ch, CURLOPT_HEADER, 0);  // DO NOT RETURN HTTP HEADERS
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);  // RETURN THE CONTENTS OF THE CALL
+			$result = curl_exec($ch);
+		}
+
 		return $result;
 	}
 
@@ -210,13 +221,29 @@ class Controller_SDN
 		}
 	}
 
-	public function Update_Controller(){
+	public function DeleteAllFlowRules()
+	{
+		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/staticentrypusher/clear/all/json");
+	}
+
+	public function DeleteAllFlowRulesOfSwitch($dpid)
+	{
+		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/staticentrypusher/clear/" . $dpid . "/json");
+	}
+
+	public function DeleteSingleFlowRule($data)
+	{
+		return $this->CallRESTAPI("POST", "http://" . $this->controller_ip . ":8080/wm/staticentrypusher/json", $data);
+	}
+
+	public function Update_Controller()
+	{
 		// Creazione della SwitchList, ossia la lista degli switch nella rete.
 		$this->Update_SwitchList();
-   
+
 		// Creazione della lista dei collegamenti InterSwitch, ossia link che collegano due switch tra loro.
 		$this->Update_InterSwitchLinkLIst();
-		
+
 		$this->Update_DeviceList();
 		// Creazione della matrice di rappresentazione della topologia della rete.
 		$this->Update_Graph();
@@ -226,19 +253,19 @@ class Controller_SDN
 
 function Search_InterSwitch_Link($s1, $s2, $linkList)
 {
-    $No_Link = 99999;
+	$No_Link = 99999;
 
-    $num = count($linkList);
-    for ($i = 0; $i < $num; $i++) {
-        if (
-            ($linkList[$i]->srg_DPID == $s1 && $linkList[$i]->dst_DPID == $s2)
-            ||
-            ($linkList[$i]->srg_DPID == $s2 && $linkList[$i]->dst_DPID == $s1)
-        ) {
-            return $linkList[$i]->latenza;
-        }
-    }
-    return $No_Link;
+	$num = count($linkList);
+	for ($i = 0; $i < $num; $i++) {
+		if (
+			($linkList[$i]->srg_DPID == $s1 && $linkList[$i]->dst_DPID == $s2)
+			||
+			($linkList[$i]->srg_DPID == $s2 && $linkList[$i]->dst_DPID == $s1)
+		) {
+			return $linkList[$i]->latenza;
+		}
+	}
+	return $No_Link;
 }
 
 

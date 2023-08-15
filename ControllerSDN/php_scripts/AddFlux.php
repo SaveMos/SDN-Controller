@@ -43,7 +43,6 @@ if ($num_checked > 0) {
     }
 }
 
-
 $Indice_Switch_Sorgente = -1;
 $Indice_Switch_Destinatario = -1;
 
@@ -78,8 +77,8 @@ if ($ind < 0) {
 AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice_Switch_Destinatario, $Position, $Host_Sorgente, $Host_Destinatario);
 
 if ($Bidirezionale == true) {
-    $Position_Reverse = (is_null($Position)) ? $Position : array_reverse($Position); 
-    AggiungiRegola($Controller, $Priority,  $Indice_Switch_Destinatario, $Indice_Switch_Sorgente , $Position_Reverse,  $Host_Destinatario , $Host_Sorgente);
+    $Position_Reverse = (is_null($Position)) ? $Position : array_reverse($Position);
+    AggiungiRegola($Controller, $Priority,  $Indice_Switch_Destinatario, $Indice_Switch_Sorgente, $Position_Reverse,  $Host_Destinatario, $Host_Sorgente);
 }
 
 header("Location: ModificaFlusso.php ", true, 302);
@@ -111,17 +110,15 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
     $res = 0;
 
     if ($Num <= 0) {
-
         $_SESSION["esito"] = 0;
         $_SESSION["esito_msg"] = "Errore Sconosciuto";
         header("Location: ModificaFlusso.php ", true, 302);
         exit();
     }
 
-
     if ($Num == 1) {
         // CASO PARTICOLARE --> La sorgente e la Destinazione si trovano nello stesso switch
-        $Name = "flow-mod-" . (rand(1000, 9999)) . "_" . (1) . "_" . (rand(0, 800));
+        $Name = "flow_mod_" . (rand(1000, 9999)) . "_" . (1);
         $in_port = $Host_Sorgente->Get_My_Switch_Port();
         $out_port = $Host_Destinatario->Get_My_Switch_Port();
         $ports = [$in_port, $out_port];
@@ -140,13 +137,12 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
         $res = $Controller->Insert_Flux($command);
     }
 
-
     if ($Num == 2) {
         // CASO PARTICOLARE --> La sorgente e la destinazione sono in due switch direttamente collegati
         $in_port = $Host_Sorgente->Get_My_Switch_Port();
         $out_port = $Host_Destinatario->Get_My_Switch_Port();
 
-        $Name = "flow-mod-" . (rand(1000, 9999)) . "_" . (1) . "_" . (rand(0, 800));
+        $Name = "flow_mod_" . (rand(1000, 9999)) . "_" . (1);
 
         $Switch_i_sorg = fixObject($Controller->SwitchList[$Path[0]]);
         $Switch_i_dest = fixObject($Controller->SwitchList[$Path[1]]);
@@ -169,7 +165,7 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
         $res = $Controller->Insert_Flux($command);
 
         // Secondo Switch
-        $Name = "flow-mod-" . (rand(1000, 9999)) . "_" . (2) . "_" . (rand(0, 800));
+        $Name = "flow_mod_" . (rand(1000, 9999)) . "_" . (2);
 
         $porte = [$ports[1], $out_port];
 
@@ -186,11 +182,10 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
         $res = $Controller->Insert_Flux($command);
     }
 
-
     if ($Num >= 3) {
         for ($i = 0; $i < $Num; $i++) {
             // CASO GENERICO
-            $Name = "flow-mod-" . (rand(1000, 9999)) . "_" . ($i + 1) . "_" . (rand(0, 800));
+            $Name = "flow_mod_" . (rand(1000, 9999)) . "_" . ($i + 1);
             if ($i == 0) {
                 $in_port = $Host_Sorgente->Get_My_Switch_Port();
 
