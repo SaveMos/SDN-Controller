@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once("../classi_php/Controller_SDN.php");
+require_once("../librerie_php/Algoritmi_Vari.php");
 ?>
 
 <!DOCTYPE html>
@@ -16,19 +18,22 @@ session_start();
 
 <body onload="EventHandler()">
     <?php
-        if(isset($_SESSION["esito"])){
-            if($_SESSION["esito"] == 1){
-                echo "<p class='infoImportante2'> Regola aggiunta con Successo!</p>";
-            }else{
-                echo "<p class='infoImportante'> Inserimento Regola Fallito! ".$_SESSION['esito_msg']."</p>";
-            }
 
-            $_SESSION["esito"] = null;
-            
+    if (isset($_SESSION["esito"])) {
+        if ($_SESSION["esito"] == 1) {
+            echo "<p class='infoImportante2'> Regola aggiunta con Successo!</p>";
+        } else {
+            echo "<p class='infoImportante'> Inserimento Regola Fallito! " . $_SESSION["esito_msg"] . "</p>";
         }
+        unset($_SESSION["esito"]);
+        unset($_SESSION["esito_msg"] );
+    }
     ?>
 
-    <p> <a class="option_link" href="../index.php">Home</a> </p>
+    <div>
+        <a class="option_link" href="../index.php">Home</a>
+        <a class="option_link" href="GestioneFlussi.html">Gestione Flussi</a>
+    </div>
     <h1>Configuratore di Flusso</h1>
 
     <div class="greater_option_cointainer">
@@ -98,16 +103,22 @@ session_start();
 
                 <label for='Other_Option_Bidirezionale_check'> Bidirezionale </label>
                 <input class='Other_Option_CheckBox' type='checkbox' id='Other_Option_Bidirezionale_check' name='Other_Option_Bidirezionale_check'>
-                
+
                 <br><br>
                 <label for='Other_Option_Bidirezionale_check'> Priorità</label>
-                <input class='Other_Option_CheckBox' type='number' id='priority_flux' name = 'priority_flux' value="32768" max="32768" min="0">
+                <input class='Other_Option_CheckBox' type='number' id='priority_flux' name='priority_flux' value="32768" max="32768" min="0">
 
             </div>
 
             <div id="check_box_container" name="check_box_container">
 
                 <?php
+                $Controller = fixObject($_SESSION["Controller"]);
+
+                $Controller->Update_Controller();
+
+                $_SESSION["Controller"] = $Controller;
+
                 echo "<h3 class='info1'>Seleziona gli Switch da cui desideri far passare il flusso.</h3>";
                 echo "<div id='info_container'>";
                 echo "<p class='infoImportante'>NOTA BENE! L'ordine con cui selezioni gli switch è importante, 
@@ -117,13 +128,13 @@ session_start();
 
                 echo "<div id='check_box_container_interno'>";
 
-                $SwitchList = $_SESSION["SwitchList"];
-                $num_switch = count($_SESSION["SwitchList"]);
+                $SwitchList = $Controller->SwitchList;
+                $num_switch = count($SwitchList);
 
                 for ($i = 0; $i < $num_switch; $i++) {
-                    $s_i = get_object_vars($SwitchList[$i]);
+                    $s_i = fixObject($SwitchList[$i]);
                     echo "<input class = 'Switch_CheckBox' type='checkbox' id='switch_check$i' name='switch_check$i'> 
-                        <label class='Switch_CheckBox_label' for='switch_check$i'>" . $s_i['DPID'] . "</label> 
+                        <label class='Switch_CheckBox_label' for='switch_check$i'>" . $s_i->DPID . "</label> 
                         <span class = 'Switch_CheckBoxPos' id='switch_checkPos$i' name='switch_checkPos$i' >-</span>
                         <br>";
                 }

@@ -1,8 +1,7 @@
 <?php
-require_once("../librerie_php/REST_API_Library.php");
 require_once("../librerie_php/Algoritmi_Vari.php");
+require_once("../classi_php/Controller_SDN.php");
 
-require_once('../classi_php/Switch_SDN.php');
 session_start();
 ?>
 
@@ -19,64 +18,52 @@ session_start();
 
 <body>
 
-    <p> <a class="option_link" href="../index.php">Home</a> </p>
+    <div>
+        <a class="option_link" href="../index.php">Home</a>
+        <a class="option_link" href="GestioneFlussi.html">Gestione Flussi</a>
+    </div>
     <h1>Flussi Installati</h1>
 
     <?php
-    $ret = CallRESTAPI("GET", "http://" . $_SESSION["IP_Controller"] . ":8080/wm/staticentrypusher/list/all/json");
-    $ret = json_decode($ret);
+    $Controller = $_SESSION["Controller"];
+    $Controller = fixObject($Controller); 
+
+    echo "<p> Sono stati installati ".($Controller->getNumber_OF_Flux())." flussi. </p>";
+
+    $ret = json_decode($Controller->getFlussiInstallati());
 
     $SwitchRules = get_object_vars($ret);
 
-    $SwitchList = $_SESSION["SwitchList"];
+    $SwitchList = $Controller->SwitchList;
     $num = count($SwitchList);
 
     for ($i = 0; $i < $num; $i++) {
         $Switch_i = (fixObject($SwitchList[$i]));
         $dpid = $Switch_i->DPID;
-        echo "<h4>Regole applicate allo switch [ <bold>" . $dpid . "</bold> ]:</h4>";
+        
+        echo "<h4>Regole applicate allo switch [ " . $dpid . " ]:</h4>";
 
         if (isset($SwitchRules[$dpid])) {
             if (count($SwitchRules[$dpid]) > 0) {
                 $Num_Regole_i = count($SwitchRules[$dpid]);
                 for ($j = 0; $j < $Num_Regole_i; $j++) {
                     echo "<p>" . ($j + 1) . " ) </p>";
-                    echo "<pre>"; print_r(get_object_vars($SwitchRules[$dpid][$j])); echo "</pre>";
+                    echo "<pre>";
+                    print_r(get_object_vars($SwitchRules[$dpid][$j]));
+                    echo "</pre>";
                     echo "<br><br>";
                 }
-            }else{
+            } else {
                 echo "<p> Nessuna regola applicata!</p>";
             }
         } else {
             echo "<p> Nessuna regola applicata!</p>";
         }
-
-
         echo "<br><br>";
     }
 
-
     ?>
-
-
 
 </body>
 
 </html>
-
-<?php
-function pp($arr){
-    $retStr = '<ul>';
-    if (is_array($arr)){
-        foreach ($arr as $key=>$val){
-            if (is_array($val)){
-                $retStr .= '<li>' . $key . ' => ' . pp($val) . '</li>';
-            }else{
-                $retStr .= '<li>' . $key . ' => ' . $val . '</li>';
-            }
-        }
-    }
-    $retStr .= '</ul>';
-    return $retStr;
-}
-?>

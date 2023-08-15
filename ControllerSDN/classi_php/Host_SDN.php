@@ -40,12 +40,15 @@ class Host_SDN
 }
 
 function SearchHostByIPAddr($Host_SDN_array , $ipv4_addr){
+
     $c = count($Host_SDN_array);
-    if($c == 0){
+
+    if($c <= 0){
         return -1;
     }
+
     for($i = 0 ; $i < $c ; $i++){
-        if(get_object_vars($Host_SDN_array[$i])['IPv4_Addr'] == $ipv4_addr){
+        if($Host_SDN_array[$i]->IPv4_Addr == $ipv4_addr){
             return $i;
         }
     }
