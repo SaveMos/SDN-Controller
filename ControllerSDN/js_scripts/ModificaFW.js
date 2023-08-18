@@ -1,7 +1,5 @@
 function EventHandler(){
-    
-    
-    (document.getElementById("FlushAll")).addEventListener("click", ClickFlushAll, false);
+    //(document.getElementById("FlushAll")).addEventListener("click", ClickFlushAll, false);
 
 }
 

@@ -13,8 +13,6 @@ function EventHandler() {
         check.addEventListener("click", clickMaskCheckBox, false);
     });
 
-    var c = document.getElementById("check_box_container");
-    c.addEventListener("click", clickCheckBoxContainer, false);
 }
 
 //  <input class = "Switch_CheckBox" type="checkbox" id="switch_check1" name="switch_check1"> <label for="switch_check1">a</label> <br>
@@ -121,8 +119,4 @@ function clickMaskCheckBox() {
             (document.getElementById("Sorg_Subnet_Mask_4")).removeAttribute("readonly");
         }
     }
-}
-
-function clickCheckBoxContainer() {
-    //console.log("click");
 }

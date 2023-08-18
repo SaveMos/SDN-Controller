@@ -12,16 +12,27 @@ class Host_SDN
     // method declaration
     public function Host_SDN($mac , $ip4 , $ip6 , $vlan, $att_list) {
         $this->MAC_Addr = $mac;
-        $this->IPv4_Addr = $ip4;
+        $this->IPv4_Addr = $ip4; // Array di Indirizzi IPv4
+
         $this->IPv6_Addr = $ip6;
         $this->Vlan = $vlan;
-
+        
+        /*
+        echo "MAC List:"; print_r($this->MAC_Addr); echo "<br>";
+        echo "IPv4 List:"; print_r($this->IPv4_Addr); echo "<br>";
+        echo "IPv6 List:"; print_r($this->IPv6_Addr); echo "<br>";
+        echo "Vlan List:"; print_r($this->Vlan); echo "<br>";
+        */
         $num_attach = count($att_list);
+
         $this->Attachment_List = array();
 
         for($i = 0 ; $i < $num_attach ; $i++){
             $this->Attachment_List[$i] = new Collegamento_Host_Switch($att_list[$i]->switch , $att_list[$i]->port);
-        }   
+        }
+        /*
+        echo "Switch List:"; print_r($this->Attachment_List); echo "<br>";
+        */
     }
 
   

@@ -44,7 +44,7 @@ if (isset($_POST["Controller_IP_Addr_1"]) || isset($_SESSION["IP_Controller"])) 
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width">
     <link rel="stylesheet" href="style/style.css">
-    <script src="js_scripts/configurator.js"></script>
+    <script type="text/javascript" src="js_scripts/configurator.js"></script>
     <title>SDN Configurator</title>
 </head>
 
@@ -70,11 +70,11 @@ if (isset($_POST["Controller_IP_Addr_1"]) || isset($_SESSION["IP_Controller"])) 
 
     <ul>
 
-        <li> <a class="option_link" href="php_scripts/GestioneFlussi.html">Gestione Flussi</a></li> <br>
+        <li> <a class="option_link" href="php_scripts\GestioneFlussi\GestioneFlussi.html">Gestione Flussi</a></li> <br>
 
-        <li> <a class="option_link" href="php_scripts/ModificaACL.php">Gestione ACL</a> </li> <br>
+        <li> <a class="option_link" href="php_scripts\GestioneACL\GestioneACL.html">Gestione ACL</a> </li> <br>
 
-        <li> <a class="option_link" href="php_scripts/ModificaFW.php">Gestione Firewall</a> </li> <br>
+        <li> <a class="option_link" href="php_scripts\GestioneFW\GestioneFW.php">Gestione Firewall</a> </li> <br>
 
     </ul>
 

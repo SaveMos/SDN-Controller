@@ -8,6 +8,7 @@
     margin-left: 2vh;
     display: inline-block;
     width: fit-content;
+    height: fit-content;
 }
 
 
@@ -16,6 +17,8 @@
     margin-top: 15px;
     display: inline-block;
     width: 60%;
+    
+
 }
 
 .greater_option_cointainer {
@@ -28,7 +31,7 @@
 
 .input_action_container{
     margin-left: 2vh;
-    margin-bottom: 5vh;
+    margin-bottom: 2vh;
     display: inline-block;
     width: fit-content;
     font-family: 'Courier New', Courier, monospace;
@@ -36,20 +39,24 @@
 }
 
 .option_container {
-    height: 80px;
-    margin-left: 2vh;
-    margin-right: 2vh;
+    height: fit-content;
+    width: 90%;
+    min-height: 80px;
+   
+    margin: 2vh;
+
     background-color: wheat;
+    border: 2px dotted black;
+   
 }
 
 
 .ACL_button {
     height: fit-content;
     width: fit-content;
-    font-size: 2.6vh;
-    margin-right: 2vh;
-    margin-top: 29px;
-    float:right;
+    font-size: 3vh;
+    margin-left: 2vh;
+    margin-top: 2vh;
     display: inline;
     cursor: pointer;
 }
@@ -60,16 +67,47 @@
     width: fit-content;
     height: fit-content;
     display: inline-block;
-
+    text-align: center;
+  
 }
 .IP_Addr_Number_input{ 
-    width: 40px;
+    width: fit-content;
     display: inline;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.MAC_Addr_Number_input{ 
+    width: 35vh;
+    display: inline;
+    font-size: large;
     font-family: 'Courier New', Courier, monospace;
 }
 
 .Rule_Number_input{
-    width: 70px;
+    width: fit-content;
     display: inline;
+    font-size: large;
     font-family: 'Courier New', Courier, monospace;
+}
+
+
+.infoImportante{
+    color: rgb(173, 10, 10);
+    font-size: small;
+    font-style: italic;
+}
+
+
+.infoImportante3{
+    color: rgb(24, 2, 221);
+    font-size: small;
+    font-style: italic;
+}
+
+
+.infoImportante2{
+    color: rgb(12, 194, 27);
+    font-size: small;
+    font-style: italic;
 }

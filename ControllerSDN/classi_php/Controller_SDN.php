@@ -1,29 +1,43 @@
 <?php
-
 require_once("Host_SDN.php");
 require_once("Switch_SDN.php");
 
 class Controller_SDN
 {
 	public $controller_ip;
-
 	private $Number_Of_Flux;
-
+	private $Number_Of_ACL_Rules;
+	private $Number_Of_FW_Rules;
+	private $FirewallState;
 	public $graph;
 	public $SwitchList;
 	public $InterSwitchLinkList;
 	public $DeviceList;
 
+	// Costruttore
 	public function Controller_SDN($ip)
 	{
 		$this->controller_ip = trim($ip);
+
+		$this->Number_Of_Flux = 0;
+		$this->Number_Of_ACL_Rules = 0;
+		$this->Number_Of_FW_Rules = 0;
+
+		$this->FirewallState = false;
+
 		$this->UpdateNumber_OF_Flux();
+		$this->UpdateNumber_OF_ACL_Rules();
+		$this->UpdateNumber_OF_FW_Rules();
 	}
+
+	// Funzione privata per richiamare una REST API
 	private function CallRESTAPI($method, $url, $data = null)
 	{
+		// Dato un URL, un Metodo {POST, GET o DELETE} e dei dati
+		// questa funzione invoca una REST API e restituisce il risultato.
+
 		$url = trim($url);
 		$method = trim($method);
-
 		$result = 0;
 
 		if ($method == "POST") {
@@ -57,9 +71,21 @@ class Controller_SDN
 			$result = curl_exec($ch);
 		}
 
+		if ($method == "PUT") {
+			// Cancella è equivalente a DELETE, ma non è keyword di php
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT'); // curl_setopt($ch, CURLOPT_PUT, true); - for PUT
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+			curl_setopt($ch, CURLOPT_HEADER, 0);  // DO NOT RETURN HTTP HEADERS
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);  // RETURN THE CONTENTS OF THE CALL
+			$result = curl_exec($ch);
+		}
+
 		return $result;
 	}
 
+	// Funzioni pubbliche per richiamare REST API Specifiche
 	public function getTopology()
 	{
 		return $this->CallRESTAPI("POST", "http://" . $this->controller_ip . ":8080/wm/topology/switchclusters/json");
@@ -80,25 +106,21 @@ class Controller_SDN
 		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/topology/links/json");
 	}
 
-	private function UpdateNumber_OF_Flux()
-	{
-		$Rules = get_object_vars(json_decode($this->getFlussiInstallati()));
-		$NumSwitch = count($Rules);
-		$count = 0;
-
-		for ($i = 0; $i < $NumSwitch; $i++) {
-			$a = array_pop($Rules);
-			$count += count($a);
-		}
-		$this->Number_Of_Flux = $count;
-	}
-
 	public function getNumber_OF_Flux()
 	{
+		// Restituisce il numero di regole instalate senza ricalcolare il valore di nuovo.
 		if ($this->Number_Of_Flux <= 0) {
 			$this->UpdateNumber_OF_Flux();
 		}
-		return intval($this->Number_Of_Flux);
+		return ($this->Number_Of_Flux);
+	}
+
+	public function getNumber_Of_ACL_Rules(){
+		return $this->Number_Of_ACL_Rules;
+	}
+
+	public function getNumber_Of_FW_Rules(){
+		return $this->Number_Of_FW_Rules;
 	}
 
 	public function getFlussiInstallati()
@@ -106,12 +128,38 @@ class Controller_SDN
 		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/staticentrypusher/list/all/json");
 	}
 
+	public function getACLRulesInstallate()
+	{
+		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/acl/rules/json");
+	}
+	public function getFWRulesInstallate()
+	{
+		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/firewall/rules/json");
+	}
+
+	// Funzioni di Inserimento
 	public function Insert_Flux($flux_details)
 	{
 		$ret = $this->CallRESTAPI("POST", "http://" . ($this->controller_ip) . ":8080/wm/staticentrypusher/json", $flux_details);
 		$this->UpdateNumber_OF_Flux();
+		return $ret;
 	}
 
+	public function InsertACLRule($rule_details)
+	{
+		$ret = $this->CallRESTAPI("POST", "http://" . ($this->controller_ip) . ":8080/wm/acl/rules/json", $rule_details);
+		$this->Number_Of_ACL_Rules++;
+		return $ret;
+	}
+
+	public function InsertFWRule($rule_details)
+	{
+		$ret = $this->CallRESTAPI("POST", "http://" . ($this->controller_ip) . ":8080/wm/firewall/rules/json", $rule_details);
+		$this->Number_Of_FW_Rules++;
+		return $ret;
+	}
+
+	// Funzioni di Aggiornamento
 	public function Update_SwitchList()
 	{
 		$SwitchList = json_decode($this->getSwitchList());
@@ -183,8 +231,8 @@ class Controller_SDN
 			$DeviceList_Definitiva[$i] = new Host_SDN(
 				$cleanDeviceList[$i]->mac[0],
 				$cleanDeviceList[$i]->ipv4[0],
-				//$cleanDeviceList[$i]->ipv6[0],
 				'-',
+				//$cleanDeviceList[$i]->ipv6[0],
 				$cleanDeviceList[$i]->vlan[0],
 				$cleanDeviceList[$i]->attachmentPoint
 			);
@@ -221,21 +269,36 @@ class Controller_SDN
 		}
 	}
 
-	public function DeleteAllFlowRules()
+	public function UpdateNumber_OF_Flux()
 	{
-		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/staticentrypusher/clear/all/json");
+		// Ricalcola il numero di regole installate e infine lo restituisce.
+		$Rules = get_object_vars(json_decode($this->getFlussiInstallati()));
+		$NumSwitch = count($Rules);
+		$count = 0;
+
+		for ($i = 0; $i < $NumSwitch; $i++) {
+			$a = array_pop($Rules);
+			$count += count($a);
+		}
+		$this->Number_Of_Flux = ($count);
+		return $count;
 	}
 
-	public function DeleteAllFlowRulesOfSwitch($dpid)
+	public function UpdateNumber_OF_ACL_Rules()
 	{
-		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/staticentrypusher/clear/" . $dpid . "/json");
+		$ret = json_decode($this->getACLRulesInstallate());
+    	$this->Number_Of_ACL_Rules = count($ret);
+		return $this->Number_Of_ACL_Rules;
 	}
 
-	public function DeleteSingleFlowRule($data)
+	public function UpdateNumber_OF_FW_Rules()
 	{
-		return $this->CallRESTAPI("POST", "http://" . $this->controller_ip . ":8080/wm/staticentrypusher/json", $data);
+		$ret = json_decode($this->getFWRulesInstallate());
+    	$this->Number_Of_FW_Rules = count($ret);
+		return $this->Number_Of_FW_Rules;
 	}
 
+	// Refresh Totale del Controller
 	public function Update_Controller()
 	{
 		// Creazione della SwitchList, ossia la lista degli switch nella rete.
@@ -244,12 +307,76 @@ class Controller_SDN
 		// Creazione della lista dei collegamenti InterSwitch, ossia link che collegano due switch tra loro.
 		$this->Update_InterSwitchLinkLIst();
 
+		// Creazione della Lista degli Host collegati al controller
 		$this->Update_DeviceList();
+
 		// Creazione della matrice di rappresentazione della topologia della rete.
 		$this->Update_Graph();
+
+		$this->UpdateNumber_OF_Flux();
+
+		$this->UpdateNumber_OF_ACL_Rules();
+	}
+
+	// Funzioni di Eliminazione
+	public function DeleteAllFlowRules()
+	{
+		$ret = $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/staticentrypusher/clear/all/json");
+		$this->UpdateNumber_OF_Flux();
+		return $ret;
+	}
+
+	public function DeleteAllFlowRulesOfSwitch($dpid)
+	{
+		$ret = $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/staticentrypusher/clear/" . $dpid . "/json");
+		$this->UpdateNumber_OF_Flux();
+		return $ret;
+	}
+
+	public function DeleteSingleFlowRule($data)
+	{
+		$ret = $this->CallRESTAPI("CANCELLA", "http://" . $this->controller_ip . ":8080/wm/staticentrypusher/json", $data);
+		$this->UpdateNumber_OF_Flux();
+		return $ret;
+	}
+
+	public function DeleteAllACLRules()
+	{
+		$ret = $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/acl/clear/json");
+		$this->Number_Of_ACL_Rules = 0;
+		return $ret;
+	}
+
+	public function DeleteSingleACLRule($data)
+	{
+		$ret = $this->CallRESTAPI("CANCELLA", "http://" . $this->controller_ip . ":8080/wm/acl/rules/json", $data);
+		$this->Number_Of_ACL_Rules--;
+		return $ret;
+	}
+
+	public function DeleteSingleFWRule($data){
+		$ret = $this->CallRESTAPI("CANCELLA", "http://" . $this->controller_ip . ":8080/wm/firewall/rules/json", $data);
+		$this->Number_Of_FW_Rules--;
+		return $ret;
+	}
+
+	// Altro
+	public function EnableFirewall($state = true)
+	{
+		if ($state == true) {
+			$ret = $this->CallRESTAPI("PUT", "http://" . $this->controller_ip . ":8080/wm/firewall/module/enable/json");
+			$this->FirewallState = true;
+		}else{
+			$ret = $this->CallRESTAPI("PUT", "http://" . $this->controller_ip . ":8080/wm/firewall/module/disable/json");
+			$this->FirewallState = true;
+		}
+	}
+
+	public function ShowFirewallState()
+	{
+		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/firewall/module/status/json");
 	}
 }
-
 
 function Search_InterSwitch_Link($s1, $s2, $linkList)
 {
@@ -262,14 +389,8 @@ function Search_InterSwitch_Link($s1, $s2, $linkList)
 			||
 			($linkList[$i]->srg_DPID == $s2 && $linkList[$i]->dst_DPID == $s1)
 		) {
-			return $linkList[$i]->latenza;
+			return intval($linkList[$i]->latenza);
 		}
 	}
 	return $No_Link;
 }
-
-
-
-// Interswitch link http://192.168.1.30:8080/wm/topology/links/json
-// get switches --> http://192.168.1.30:8080/wm/topology/switchclusters/json
-// Get all devices in the topology with links --> http://192.168.1.30:8080/wm/device/

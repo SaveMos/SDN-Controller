@@ -20,3 +20,16 @@
     display: inline;
     font-family: 'Courier New', Courier, monospace;
 }
+
+.info1{
+    color: rgb(173, 10, 10);
+    font-size: small;
+    font-style: italic;
+}
+
+
+.info2{
+    color: rgb(12, 194, 27);
+    font-size: small;
+    font-style: italic;
+}
