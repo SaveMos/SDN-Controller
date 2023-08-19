@@ -1,11 +1,4 @@
 
-.option_link{
-    cursor: pointer;
-    width : 30vh;
-    font-size: 2.6vh;
-    margin-left: 2vh;
-}
-
 
 .IP_address_input_container{
     margin-top: 2vh;
@@ -27,9 +20,113 @@
     font-style: italic;
 }
 
-
 .info2{
     color: rgb(12, 194, 27);
     font-size: small;
     font-style: italic;
 }
+
+.main_title{
+    font-size: xx-large;
+    text-decoration: underline;
+    
+}
+
+.nav_bar_container{
+    border: 2.5px dotted gray;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+}
+
+.general_options_container{
+    border: 2.5px dotted gray;
+    background-color: wheat;
+    width: fit-content;
+    
+    padding-right: 2vh;
+    padding-left: 2vh;
+    padding-bottom: 2vh;
+    height: fit-content;
+
+    margin-bottom: 2vh;
+}
+
+.option_link{
+    cursor: pointer;
+    width : 30vh;
+    font-size: 2.6vh;
+    margin-left: 2vh;
+    margin-right: 2vh;
+}
+
+.option_link_separator{
+    font-size: large;
+}
+
+.FlushSingleRule_Button{
+    font-family:'Courier New', Courier, monospace;
+    font-size: large;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+    border-radius: 50px;
+    border-color: gray;
+}
+
+.FlushAll_Button{
+    font-family:'Courier New', Courier, monospace;
+    background-color: rgb(248, 59, 59);
+    font-weight: bold;
+    font-size: large;
+    border-radius: 50px;
+    border-color: gray;
+}
+
+.FlushAll_SwitchButton{
+    font-family:'Courier New', Courier, monospace;
+    background-color: rgb(240, 177, 105);
+    font-size: large;
+    border-radius: 50px;
+    border-color: gray;
+}
+
+.RuleNumber{
+    font-size: large;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    margin-right: 2vh;
+    margin-top: 2vh;
+}
+
+.RuleContainer{
+    width: fit-content;
+    height: fit-content;
+    display: inline-block;
+
+    padding-right: 2vh;
+    padding-left: 2vh;
+    padding-top: 1vh;
+
+    background-color: wheat;
+    border: 2px dotted black;
+}
+
+.container_switch_rules{
+    width: fit-content;
+
+    min-width: 50vw;
+    height: fit-content;
+    display: inline-block;
+
+    padding-right: 2vh;
+    padding-left: 2vh;
+
+    background-color: rgb(245, 155, 133);
+    border: 2px dotted black;
+}
+
+.InfoSwitchFlowRules{
+    font-size: large;
+}
+
+

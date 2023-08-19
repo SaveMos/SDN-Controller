@@ -9,7 +9,7 @@ function EventHandler() {
 
 function ClickFlushAll() {
     const conferma = prompt("Se vuoi davvero cancellare TUTTI i flussi? Se si, digita: 'CANCELLA'");
-    if (conferma === "CANCELLA") {
+    if (conferma == "CANCELLA") {
         fetch("DeleteFlowRules/DeleteAllFlowRule.php?")
             .then(location.reload());
     } else {
@@ -17,7 +17,6 @@ function ClickFlushAll() {
     }
 
 }
-
 
 function ClickFlushAllSwitch() {
     const dpid = this.name;

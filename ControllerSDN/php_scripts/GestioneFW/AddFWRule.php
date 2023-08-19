@@ -30,19 +30,50 @@ $Priorita = SecureNumber($_POST["Priority"]);
 $dpid = trim($_POST["SwitchFW"]);
 
 
+
 $cod = 0;
 $res = 0;
 
+
+
 if (
     ($act == "ALLOW" || $act == "DENY")
+    && ($prot == "ICMP" || $prot = "UDP" || $prot == "TCP" || $prot == "all")
     && (SecureSubnetMask($dst_Mask))
     && (SecureSubnetMask($src_Mask))
     && (SecureIPAddress($dst_ip))
     && (SecureIPAddress($src_ip))
-) {  
-   
-    $command = CreaComando($src_ip, $src_Mask, $dst_ip, $dst_Mask, $prot , $srg_port , $dst_port , $dpid , $Priorita , $act);
-    $res = $Controller->InsertFWRule($command);
+) {
+
+    if ($prot == "ICMP") {
+        $command = CreaComandoARP($src_ip, $src_Mask, $dst_ip, $dst_Mask, $act);
+        $res = $Controller->InsertFWRule($command);
+
+        $command = CreaComandoICMP($src_ip, $src_Mask, $dst_ip, $dst_Mask, $act);
+        $res = $Controller->InsertFWRule($command);
+
+        $command = CreaComandoARP($dst_ip, $dst_Mask, $src_ip, $src_Mask, $act);
+        $res = $Controller->InsertFWRule($command);
+
+        $command = CreaComandoICMP($dst_ip, $dst_Mask, $src_ip, $src_Mask, $act);
+        $res = $Controller->InsertFWRule($command);
+
+    } elseif ($prot == "all") {
+        $command = CreaComandoARP($src_ip, $src_Mask, $dst_ip, $dst_Mask, $act);
+        $res = $Controller->InsertFWRule($command);
+
+        $command = CreaComandoARP($dst_ip, $dst_Mask, $src_ip, $src_Mask, $act);
+        $res = $Controller->InsertFWRule($command);
+
+        $command = CreaComandoALL($src_ip, $src_Mask, $dst_ip, $dst_Mask, $act);
+        $res = $Controller->InsertFWRule($command);
+
+        $command = CreaComandoALL($dst_ip, $dst_Mask, $src_ip, $src_Mask, $act);
+        $res = $Controller->InsertFWRule($command);
+    } elseif($prot == "TCP" || $prot == "UDP"){
+    }
+
+
     $Controller->UpdateNumber_OF_FW_Rules();
 }
 
@@ -50,10 +81,44 @@ $_SESSION["esito_msg"] = $res;
 header("Location: ModificaFW.php ", true, 302);
 exit();
 
-
-function CreaComando($src_ip, $src_mask, $dst_ip, $dst_mask, $prot, $srg_port = "0" , $dst_port = "0" , $dpid = "00:00:00:00:00:00:00:00" , $Priorita = "56" , $act = "DENY")
+function CreaComandoALL($src_ip, $src_mask, $dst_ip, $dst_mask, $act = "ALLOW")
 {
-    
+    // Permettere o negare flussi tra i due Host
+    $command = array(
+        "src-ip" => ($src_ip . "/" . $src_mask),
+        "dst-ip" => ($dst_ip . "/" . $dst_mask),
+        "action" => $act
+    );
+    return $command;
+}
+
+
+function CreaComandoARP($src_ip, $src_mask, $dst_ip, $dst_mask, $act = "ALLOW")
+{
+    // Permettere o negare ARP tra i due Host
+    $command = array(
+        "src-ip" => ($src_ip . "/" . $src_mask),
+        "dst-ip" => ($dst_ip . "/" . $dst_mask),
+        "dl-type" => "ARP",
+        "action" => $act
+    );
+    return $command;
+}
+
+
+function CreaComandoICMP($src_ip, $src_mask, $dst_ip, $dst_mask, $act = "ALLOW")
+{
+    $command = array(
+        "src-ip" => ($src_ip . "/" . $src_mask),
+        "dst-ip" => ($dst_ip . "/" . $dst_mask),
+        "nw-proto" => "ICMP",
+        "action" => $act
+    );
+    return $command;
+}
+
+function CreaComando1($src_ip, $src_mask, $dst_ip, $dst_mask, $prot, $srg_port = "0", $dst_port = "0", $dpid = "00:00:00:00:00:00:00:00", $Priorita = 1, $act = "DENY")
+{
     $command = array(
         "src-ip" => ($src_ip . "/" . $src_mask),
         "dst-ip" => ($dst_ip . "/" . $dst_mask),
@@ -61,7 +126,7 @@ function CreaComando($src_ip, $src_mask, $dst_ip, $dst_mask, $prot, $srg_port = 
         "nw-proto" => $prot,
         "tp-src" => $srg_port,
         "tp-dst" => $dst_port,
-        "priority" => $Priorita,
+        "priority" => $Priorita, // il numero più basso indica una priorità più alta.
         "action" => $act
     );
 

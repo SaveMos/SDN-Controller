@@ -11,21 +11,35 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width">
-    <link rel="stylesheet" href="../../style/ShowFlussi.css">
+    <link rel="stylesheet" href="../../style/style.css">
     <title>ShowFW</title>
 </head>
 
 <body>
 
-    <div>
+    <div class="nav_bar_container">
         <a class="option_link" href="../../index.php">Home</a>
+        <span class="option_link_separator">|</span>
         <a class="option_link" href="GestioneFW.php">Gestione Firewall</a>
+        <span class="option_link_separator">|</span>
+        <a class="option_link" href="ModificaFW.php">Nuova Regola</a>
     </div>
-    <h1>Regole installate nel Firewall</h1>
+    <h1 class="main_title">Regole installate nel Firewall</h1>
 
     <?php
     $Controller = fixObject($_SESSION["Controller"]);
-    echo "<p> Nel Firewall sono state installate " . ($Controller->getNumber_Of_FW_Rules()) . " regole. </p>";
+    $num_rule = ($Controller->getNumber_Of_FW_Rules());
+
+    if($num_rule == 0){
+            echo "<p class='infoNum'> Nel Firewall NON sono state installate regole. </p>";
+    }else{
+        if($num_rule == 1){
+            echo "<p class='infoNum'> Nel Firewall è stata installata " . $num_rule . " regola. </p>";
+        }else{
+            echo "<p class='infoNum'> Nel Firewall sono state installate " . $num_rule . " regole. </p>";
+        }
+    }
+    
     ?>
 
     <?php
@@ -41,15 +55,18 @@ session_start();
 
         for ($i = 0; $i < $num; $i++) {
             $rule = (get_object_vars($ret[$i]));
-
+            echo "<div class='RuleContainer'>";
             echo "<form method='post' action='DeleteFWRules/DeleteSingleFWRule.php'>";
-            echo "<button class='FlushSingleRule_Button' type='submit'> Elimina Regola [ " . trim($rule[$key]) . " ]</button>";
+            echo "<span class='RuleNumber'>".($i+1)."° Regola</span>";
+            echo "<button class='FlushSingleRule_Button' type='submit'> Elimina [ " . trim($rule[$key]) . " ]</button>";
             echo "<input type='hidden' id='RuleName' name='RuleName' value = " . trim($rule[$key]) . ">";
             echo "</form>";
 
+           
             echo "<pre>";
             print_r(get_object_vars($ret[$i]));
             echo "</pre>";
+            echo "</div>";
             echo "<br><br>";
         }
     }

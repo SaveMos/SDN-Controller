@@ -40,6 +40,7 @@ $SwitchLinkList = $Controller->InterSwitchLinkList;
 $Position = json_decode($_POST["PositionArray"]); // Prelevo l'array degli switch obbligatori.
 $num_checked = count($Position);
 
+$Bidirezionale = 0;
 if (isset($_POST["Other_Option_Bidirezionale_check"])) {
     $Bidirezionale = 1;
 } else {

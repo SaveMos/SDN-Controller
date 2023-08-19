@@ -24,6 +24,7 @@
     <p>
         <a class="option_link" href="../../index.php">Home</a>
         <a class="option_link" href="GestioneFW.php">Gestione Firewall</a>
+        <a class="option_link" href="ShowFW.php">Lista Regole del Firewall</a>
     </p>
     <h1>Modifica Firewall</h1>
 
@@ -79,10 +80,13 @@
 
                 <label for="insertFW_Protocol">Protocollo:</label>
                 <select style=" font-family: 'Courier New', Courier, monospace" name="insertFW_Protocol" id="insertFW_Protocol">
-                    <option value="tcp">TCP</option>
-                    <option value="udp">UDP</option>
-                    <option value="icmp">ICMP</option>
+                    <option value="all">Tutti</option>    
+                    <option value="TCP">TCP</option>
+                    <option value="UPD">UDP</option>
+                    <option value="ICMP">ICMP</option>
                 </select>
+
+              
             </div>
 
             <br>
@@ -98,7 +102,7 @@
             <br> 
 
             <div class="IP_address_input_container">
-                <span>Priorità:</span> <input id="Priority" name="Priority" class="IP_Addr_Number_input" type="number" value="0" min="0" max = "56" step="1">
+                <span>Priorità:</span> <input id="Priority" name="Priority" class="IP_Addr_Number_input" type="number" value="1" min="1" max = "56" step="1">
             </div>
 
             <br>
