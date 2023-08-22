@@ -1,4 +1,6 @@
-
+.input_field_container{
+    background-color: wheat;
+}
 
 .IP_address_input_container{
     margin-top: 2vh;
@@ -6,6 +8,7 @@
     width: fit-content;
     height: fit-content;
     display: inline-block;
+    
 
 }
 .IP_Addr_Number_input{ 
@@ -14,10 +17,41 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
+
+.info0{
+    color: rgb(173, 10, 10);
+    font-size: medium;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+.info01{
+    color: rgb(12, 194, 27);
+    font-size: medium;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: underline;
+}
+
+
+.info03{
+    color: rgb(7, 34, 187);
+    font-size: medium;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: underline;
+}
+
+
+
 .info1{
     color: rgb(173, 10, 10);
-    font-size: small;
+    font-size: medium;
     font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .info2{

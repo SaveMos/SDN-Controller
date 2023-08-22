@@ -1,8 +1,8 @@
 
 .greater_option_cointainer {
-    display: block;
-    width: 95%;
+    display: inline-block;
     height: fit-content;
+    width: fit-content;
     font-size: medium;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -20,24 +20,21 @@
     display: inline-block;
     width: fit-content;
     font-family: 'Courier New', Courier, monospace;
-
 }
 
 .option_container {
     height: 80px;
     margin-left: 2vh;
     margin-right: 2vh;
- 
 }
 
 .input_field_container{
-    background-color: rgb(238, 227, 206);
+    background-color: wheat;
     width: fit-content;
-    padding: 20px;
+    padding: 2vh;
     height: fit-content;
     display: inline-block;
 }
-
 
 .Flux_button {
     height: fit-content;
@@ -50,16 +47,15 @@
     margin-bottom: 4%;
 }
 
-
 .IP_address_input_container{
-    margin-top: 2vh;
+    margin-top: 1vh;
     margin-left: 2vh;
     height: fit-content;
     display: inline-block;
 
 }
 .IP_Addr_Number_input{ 
-    width: 40px;
+    width: fit-content;
     display: inline;
     font-family: 'Courier New', Courier, monospace;
 }

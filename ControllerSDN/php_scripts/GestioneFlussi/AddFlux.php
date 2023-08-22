@@ -11,17 +11,22 @@ require_once("../../classi_php/Controller_SDN.php");
 $src_ip = intval($_POST["Sorg_IP_Addr_1"]) . "." . intval($_POST["Sorg_IP_Addr_2"]) . "." . intval($_POST["Sorg_IP_Addr_3"]) . "." . intval($_POST["Sorg_IP_Addr_4"]);
 $dst_ip = intval($_POST["Dest_IP_Addr_1"]) . "." . intval($_POST["Dest_IP_Addr_2"]) . "." . intval($_POST["Dest_IP_Addr_3"]) . "." . intval($_POST["Dest_IP_Addr_4"]);
 
+$src_ip = SecureIPAddress($src_ip);
+$dst_ip = SecureIPAddress($dst_ip);
+
 $Controller = fixObject($_SESSION["Controller"]);
 
 $SwitchList = $Controller->SwitchList;
 $num_switch = count($SwitchList);
 
-$Priority = SecureNumber(intval($_POST["priority_flux"]));
+$Priority = SecureNumber($_POST["priority_flux"]);
 
 $FlowName = SecureTextInput($_POST["flux_name"]);
 
 if($FlowName == ""){
     $FlowName = "flow-mod-";
+}else{
+    $FlowName = $FlowName."-";
 }
 
 if($Priority > 32767){
@@ -71,8 +76,6 @@ if ($ind < 0) {
     $Indice_Switch_Sorgente = Search_Switch($SwitchList, $Switch_Sorgente);
 }
 
-//echo $Indice_Switch_Sorgente;
-
 $ind = SearchHostByIPAddr($DevList, $dst_ip);
 
 if ($ind < 0) {
@@ -88,7 +91,7 @@ if ($ind < 0) {
 
 AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice_Switch_Destinatario, $Position, $Host_Sorgente, $Host_Destinatario, $FlowName);
 
-if ($Bidirezionale == true) {
+if ($Bidirezionale == 1) {
     $Position_Reverse = (is_null($Position)) ? $Position : array_reverse($Position);
     $FlowName = $FlowName."bidirect-";
     AggiungiRegola($Controller, $Priority,  $Indice_Switch_Destinatario, $Indice_Switch_Sorgente, $Position_Reverse,  $Host_Destinatario, $Host_Sorgente , $FlowName);
@@ -142,8 +145,11 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
         $out_port = $Host_Destinatario->Get_My_Switch_Port();
 
         $Name = $Prefisso . (rand(1000, 9999)) . $Separatore . (1);
-        $command = CreaComando($Switch_i->DPID, $Name, $Priority, $in_port, $out_port, $ipv4_src, $ipv4_dst);
+        
+        $command = CreaComandoARP($Switch_i->DPID, $Name, $in_port, $out_port, $ipv4_src, $ipv4_dst);
+        $res = $Controller->Insert_Flux($command);
 
+        $command = CreaComando($Switch_i->DPID, $Name, $Priority, $in_port, $out_port, $ipv4_src, $ipv4_dst);
         $res = $Controller->Insert_Flux($command);
         //echo "Codice: ".$res."<br>";
     }
@@ -160,12 +166,20 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
 
         // Primo Switch
         $Name = $Prefisso . (rand(1000, 9999)) . $Separatore . (1);
+
+        $command = CreaComandoARP($Switch_i_sorg->DPID, $Name, $in_port, $ports[0], $ipv4_src, $ipv4_dst);
+        $res = $Controller->Insert_Flux($command);
+
         $command = CreaComando($Switch_i_sorg->DPID, $Name, $Priority, $in_port, $ports[0], $ipv4_src, $ipv4_dst);
         $res = $Controller->Insert_Flux($command);
         // echo "Codice: ".$res."<br>";
 
         // Secondo Switch
         $Name = $Prefisso . (rand(1000, 9999)) . $Separatore . (2);
+
+        $command = CreaComandoARP($Switch_i_dest->DPID, $Name, $ports[1], $out_port, $ipv4_src, $ipv4_dst);
+        $res = $Controller->Insert_Flux($command);
+
         $command = CreaComando($Switch_i_dest->DPID, $Name, $Priority, $ports[1], $out_port, $ipv4_src, $ipv4_dst);
         $res = $Controller->Insert_Flux($command);
        // echo "Codice: ".$res."<br>";
@@ -210,6 +224,9 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
                 $ports[1] = $out_port; // porta da cui ricevo i messaggi dell'host sorgente.
             }
 
+            $command = CreaComandoARP($Switch_i->DPID, $Name, $ports[0], $ports[1], $ipv4_src, $ipv4_dst);
+            $res = $Controller->Insert_Flux($command);
+
             $command = CreaComando($Switch_i->DPID, $Name, $Priority, $ports[0], $ports[1], $ipv4_src, $ipv4_dst);
             $res = $Controller->Insert_Flux($command);
            // echo "Codice: ".$res."<br>";
@@ -233,19 +250,37 @@ function CreaComando($SwitchDPID, $Name, $Priority, $porta_in, $porta_out, $ipv4
         "switch" => $SwitchDPID,
         "name" => $Name,
     
-        //"eth_type" => 0x0800, // Protocollo IPv4
-        //"ipv4_src" => "10.0.0.0/24", 
-        //"ipv4_dst" => "10.0.0.0/24",
+        "eth_type" => "0x0800", // Protocollo IPv4
+        "ipv4_src" => ($ipv4_src . "/32"),
+        "ipv4_dst" => ($ipv4_dst . "/32"),
         
         "cookie" => $Cookie,
         "priority" => $Priority, // Massima è 32767, minima è 0.
         "in_port" => $porta_in,
         "active" => $Active,
        
-        "actions" => (trim($Action) . "=" . $porta_out)
+        "actions" => ($Action . "=" . $porta_out)
     );
-
-    //$command = '{"switch":"'.$SwitchDPID.'", "name":"'.$Name.'","eth_type":"0x0800" , "cookie":"0", "priority":"32768", "in_port":"'.$porta_in.'","active":"true", "actions":"output="'.$porta_out.'"}';
 
     return $command;
 }
+
+function CreaComandoARP($SwitchDPID, $Name, $porta_in , $porta_out, $ipv4_src, $ipv4_dst)
+{
+    $command = array(
+        "switch" => $SwitchDPID,
+        "name" => "ARP-".$Name,
+
+        "eth_type" => "0x0806", // Pacchetto ARP
+        "arp_spa" => ($ipv4_src . "/32"),
+        "arp_tpa" => ($ipv4_dst . "/32"),
+
+        "cookie" => 0,
+        "priority" => 30000,
+        "in_port" => $porta_in,
+        "active" => true,
+        "actions" => ("output=".$porta_out."")
+    );
+    return $command;
+}
+

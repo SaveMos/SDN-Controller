@@ -7,5 +7,5 @@ session_start();
 $Controller = $_SESSION["Controller"];
 $Controller = fixObject($Controller);
 
-$Controller->DeleteAllFlowRules();
+echo $Controller->DeleteAllFlowRules();
 ?>

@@ -12,7 +12,7 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width">
     <link rel="stylesheet" href="../../style/style.css">
-    <script type="text/javascript" src="../../js_scripts/ShowFlussi.js"></script>
+    <script type="text/javascript" src="..\..\js_scripts\ShowFlussi.js"></script>
     <title>ShowFlux</title>
 </head>
 
@@ -31,8 +31,9 @@ session_start();
     <?php
 
     $Controller = fixObject($_SESSION["Controller"]);
-    $num_rule = ($Controller->UpdateNumber_OF_Flux());
+    $num_rule = $Controller->UpdateNumber_OF_Flux();
 
+    
     if($num_rule == 0){
             echo "<p class='infoNum'> NON sono state installate regole di Flusso. </p>";
     }else{
@@ -42,12 +43,10 @@ session_start();
             echo "<p class='infoNum'> Sono state installate " . $num_rule . " regole di Flusso. </p>";
         }
 
-        echo "<button class='FlushAll_Button' id='FlushAll' name='FlushAll'> Flush Totale </button> <span> Elimina Tutte le regole in tutti gli Switch</span>";
+        echo "<button class='FlushAll_Button' id='FlushAll' name='FlushAll'> Flush Totale </button> <span> Elimina tutte le regole in tutti gli Switch</span>";
     }
     
     ?>
-
-    
     </div>
     <?php
 

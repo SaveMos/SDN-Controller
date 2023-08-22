@@ -5,14 +5,17 @@ require_once("Switch_SDN.php");
 class Controller_SDN
 {
 	public $controller_ip;
-	private $Number_Of_Flux;
-	private $Number_Of_ACL_Rules;
-	private $Number_Of_FW_Rules;
 	private $FirewallState;
 	public $graph;
 	public $SwitchList;
 	public $InterSwitchLinkList;
 	public $DeviceList;
+	private $Number_Of_Flux;
+	private $Number_Of_ACL_Rules;
+	private $Number_Of_FW_Rules;
+	private $Number_Of_Switches;
+	private $Number_Of_Devices;
+	private $Number_Of_InterSwitch_Links;
 
 	// Costruttore
 	public function Controller_SDN($ip)
@@ -22,12 +25,10 @@ class Controller_SDN
 		$this->Number_Of_Flux = 0;
 		$this->Number_Of_ACL_Rules = 0;
 		$this->Number_Of_FW_Rules = 0;
-
+		$this->Number_Of_Devices = 0;
+		$this->Number_Of_Switches = 0;
+		$this->Number_Of_InterSwitch_Links = 0;
 		$this->FirewallState = false;
-
-		$this->UpdateNumber_OF_Flux();
-		$this->UpdateNumber_OF_ACL_Rules();
-		$this->UpdateNumber_OF_FW_Rules();
 	}
 
 	// Funzione privata per richiamare una REST API
@@ -106,20 +107,21 @@ class Controller_SDN
 		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/topology/links/json");
 	}
 
-	public function getNumber_OF_Flux()
-	{
+	public function getNumber_OF_Flux() {
 		// Restituisce il numero di regole instalate senza ricalcolare il valore di nuovo.
 		if ($this->Number_Of_Flux <= 0) {
 			$this->UpdateNumber_OF_Flux();
 		}
-		return ($this->Number_Of_Flux);
+		return intval($this->Number_Of_Flux);
 	}
 
-	public function getNumber_Of_ACL_Rules(){
-		return $this->Number_Of_ACL_Rules;
+	public function getNumber_Of_ACL_Rules()
+	{
+		return intval($this->Number_Of_ACL_Rules);
 	}
 
-	public function getNumber_Of_FW_Rules(){
+	public function getNumber_Of_FW_Rules() 
+	{
 		return $this->Number_Of_FW_Rules;
 	}
 
@@ -135,6 +137,26 @@ class Controller_SDN
 	public function getFWRulesInstallate()
 	{
 		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/firewall/rules/json");
+	}
+
+	public function getNumber_Of_Switch() 
+	{
+		return $this->Number_Of_Switches;
+	}
+
+	public function getNumber_Of_Devices() 
+	{
+		return $this->Number_Of_Devices;
+	}
+
+	public function getNumber_Of_InterSwitch_Links() 
+	{
+		return $this->Number_Of_InterSwitch_Links;
+	}
+
+	private function getFirewallState()
+	{
+		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/firewall/module/status/json");
 	}
 
 	// Funzioni di Inserimento
@@ -242,7 +264,7 @@ class Controller_SDN
 
 	public function Update_Graph()
 	{
-		$SwitchListDim = count($this->SwitchList);
+		$SwitchListDim = $this->getNumber_Of_Switch();
 
 		$this->graph = array();
 		for ($i = 0; $i < $SwitchListDim; $i++) {
@@ -261,7 +283,7 @@ class Controller_SDN
 					$switch_i = $this->SwitchList[$i]->DPID;
 					$switch_j = $this->SwitchList[$j]->DPID;
 
-					$this->graph[$i][$j] = Search_InterSwitch_Link($switch_i, $switch_j, $this->InterSwitchLinkList);
+					$this->graph[$i][$j] = $this->Search_InterSwitch_Link($switch_i, $switch_j);
 					$this->graph[$j][$i] =  $this->graph[$i][$j];
 					// echo  $switch_i." -- ". $switch_j." ==> ".$graph[$i][$j] . "<br>";
 				}
@@ -287,15 +309,30 @@ class Controller_SDN
 	public function UpdateNumber_OF_ACL_Rules()
 	{
 		$ret = json_decode($this->getACLRulesInstallate());
-    	$this->Number_Of_ACL_Rules = count($ret);
+		$this->Number_Of_ACL_Rules = count($ret);
 		return $this->Number_Of_ACL_Rules;
 	}
 
 	public function UpdateNumber_OF_FW_Rules()
 	{
 		$ret = json_decode($this->getFWRulesInstallate());
-    	$this->Number_Of_FW_Rules = count($ret);
+		$this->Number_Of_FW_Rules = count($ret);
 		return $this->Number_Of_FW_Rules;
+	}
+
+	private function Update_Number_Of_Switches()
+	{
+		$this->Number_Of_Switches = count($this->SwitchList);
+	}
+
+	private function Update_Number_Of_Devices()
+	{
+		$this->Number_Of_Devices = count($this->DeviceList);
+	}
+
+	private function Update_Number_Of_InterSwitch_Links()
+	{
+		$this->Number_Of_InterSwitch_Links = count($this->InterSwitchLinkList);
 	}
 
 	// Refresh Totale del Controller
@@ -316,6 +353,14 @@ class Controller_SDN
 		$this->UpdateNumber_OF_Flux();
 
 		$this->UpdateNumber_OF_ACL_Rules();
+
+		$this->UpdateNumber_OF_FW_Rules();
+
+		$this->Update_Number_Of_Devices();
+
+		$this->Update_Number_Of_Switches();
+
+		$this->Update_Number_Of_InterSwitch_Links();
 	}
 
 	// Funzioni di Eliminazione
@@ -354,43 +399,67 @@ class Controller_SDN
 		return $ret;
 	}
 
-	public function DeleteSingleFWRule($data){
+	public function DeleteSingleFWRule($data)
+	{
 		$ret = $this->CallRESTAPI("CANCELLA", "http://" . $this->controller_ip . ":8080/wm/firewall/rules/json", $data);
 		$this->Number_Of_FW_Rules--;
 		return $ret;
 	}
 
 	// Altro
+
+	public function ControllerOnline()
+	{
+		error_reporting(E_ERROR | E_PARSE);
+		$ret = null;
+		$ret = $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/core/version/json");
+		error_reporting(E_ALL);
+
+		if (is_null($ret) || $ret == false) {
+			return 0;
+		}
+
+		$ret = get_object_vars(json_decode($ret));
+
+		if ($ret["name"] == "floodlight") {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 	public function EnableFirewall($state = true)
 	{
 		if ($state == true) {
 			$ret = $this->CallRESTAPI("PUT", "http://" . $this->controller_ip . ":8080/wm/firewall/module/enable/json");
 			$this->FirewallState = true;
-		}else{
+		} else {
 			$ret = $this->CallRESTAPI("PUT", "http://" . $this->controller_ip . ":8080/wm/firewall/module/disable/json");
-			$this->FirewallState = true;
+			$this->FirewallState = false;
 		}
 	}
 
-	public function ShowFirewallState()
+	public function ShowFirewallState(){
+		if(($this->getFirewallState()) == '{"result" : "firewall disabled"}'){
+			return 1;
+		}
+		return 0;
+	}
+
+	private function Search_InterSwitch_Link($dpid1, $dpid2)
 	{
-		return $this->CallRESTAPI("GET", "http://" . $this->controller_ip . ":8080/wm/firewall/module/status/json");
-	}
-}
+		$linkList = $this->InterSwitchLinkList;
+		$No_Link = 99999;
+		$num = $this->Number_Of_InterSwitch_Links;
 
-function Search_InterSwitch_Link($s1, $s2, $linkList)
-{
-	$No_Link = 99999;
-
-	$num = count($linkList);
-	for ($i = 0; $i < $num; $i++) {
-		if (
-			($linkList[$i]->srg_DPID == $s1 && $linkList[$i]->dst_DPID == $s2)
-			||
-			($linkList[$i]->srg_DPID == $s2 && $linkList[$i]->dst_DPID == $s1)
-		) {
-			return intval($linkList[$i]->latenza);
+		for ($i = 0; $i < $num; $i++) {
+			if (
+				($linkList[$i]->srg_DPID == $dpid1 && $linkList[$i]->dst_DPID == $dpid2)
+				||
+				($linkList[$i]->srg_DPID == $dpid2 && $linkList[$i]->dst_DPID == $dpid1)
+			) {
+				return intval($linkList[$i]->latenza);
+			}
 		}
+		return $No_Link;
 	}
-	return $No_Link;
 }

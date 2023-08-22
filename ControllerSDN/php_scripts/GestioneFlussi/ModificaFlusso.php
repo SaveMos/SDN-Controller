@@ -41,7 +41,7 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
         <form action="AddFlux.php" class="option_container" method="post" id="Insert_Flux_Form" name="Insert_Flux_Form">
 
             <div class="input_field_container">
-                <label>Indirizzo IP Sorgente:</label>
+                <span>Indirizzo IP Sorg:</span>
                 <div class="IP_address_input_container">
                     <input id="Sorg_IP_Addr_1" name="Sorg_IP_Addr_1" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span>.</span>
@@ -51,9 +51,10 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
                     <span>.</span>
                     <input id="Sorg_IP_Addr_4" name="Sorg_IP_Addr_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                 </div>
+                <span>/ 32</span>
                 <br>
 
-                <label>Indirizzo IP Destinatario:</label>
+                <span>Indirizzo IP Dest:</span>
                 <div class="IP_address_input_container">
                     <input id="Dest_IP_Addr_1" name="Dest_IP_Addr_1" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span>.</span>
@@ -63,9 +64,9 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
                     <span>.</span>
                     <input id="Dest_IP_Addr_4" name="Dest_IP_Addr_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                 </div>
-
+                <span>/ 32</span>
                 <br>
-               
+
             </div>
 
             <h3 class='info1'>Altre Opzioni</h3>
@@ -81,22 +82,18 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
                 <br><br>
                 <label for='flux_name'> Nome del Flusso</label>
                 <input class='Other_Option_CheckBox' type='text' id='flux_name' name='flux_name' minlenght="1" maxlenght="50" placeholder="flow-mod">
-
             </div>
-
             <div id="check_box_container" name="check_box_container">
-
                 <?php
                 $Controller = fixObject($_SESSION["Controller"]);
-
                 $Controller->Update_Controller();
-
                 $_SESSION["Controller"] = $Controller;
-
                 echo "<h3 class='info1'>Seleziona gli Switch da cui desideri far passare il flusso.</h3>";
                 echo "<div id='info_container'>";
-                echo "<p class='infoImportante'>NOTA BENE! L'ordine con cui selezioni gli switch è importante, 
-                    quindi spunta le checkbox degli switch nello stesso ordine con cui vorresti far passare i pacchetti</p>";
+                echo "<p class='infoImportante'>
+                NOTA BENE! L'ordine con cui selezioni gli switch è importante, 
+                quindi spunta le checkbox degli switch nello stesso ordine con cui vorresti far passare i pacchetti
+                </p>";
                 echo "</div>";
                 echo "<p class='info2'> DPID degli Switch attualmente online:</p>";
 

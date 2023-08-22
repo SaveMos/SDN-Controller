@@ -26,12 +26,10 @@ session_start();
     $Controller = $_SESSION["Controller"];
     $Controller = fixObject($Controller);
 
-    $ret = $Controller->ShowFirewallState();
-    $State = 0;
+    
+    $State = 0; $ButtonText = 0; $SpanText = 0; $SpanClass = 0;
 
-    $ButtonText = 0; $SpanText = 0;
-
-    if ($ret == '{"result" : "firewall disabled"}') {
+    if (($Controller->ShowFirewallState()) == 1) {
         $State = 0;
         $ButtonText = "Attiva Firewall";
         $SpanText = "Il firewall NON è attivo";

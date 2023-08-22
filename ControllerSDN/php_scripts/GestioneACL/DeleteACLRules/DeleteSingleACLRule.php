@@ -22,6 +22,7 @@ if ($ret == '{"status" : "Success! Rule deleted"}') {
 
 $_SESSION["esito"] = $cod;
 
+
 header("Location: ../ModificaACL.php ", true, 302);
 exit();
 

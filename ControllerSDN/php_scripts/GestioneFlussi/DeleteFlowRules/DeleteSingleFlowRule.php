@@ -1,6 +1,4 @@
 <?php
-// curl -X DELETE -d '{"name":"flow-mod-1"}' http://<controller_ip>:8080/wm/staticentrypusher/json
-
 require_once("../../../classi_php/Controller_SDN.php");
 require_once('../../../librerie_php/Algoritmi_Vari.php');
 

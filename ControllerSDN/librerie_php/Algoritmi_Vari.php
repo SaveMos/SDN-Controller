@@ -2,8 +2,12 @@
 
 function fixObject(&$object)
 {
-  if (!is_object($object) && gettype($object) == 'object')
+  if (
+    (!is_object($object))
+    && (gettype($object) == 'object')
+  ) {
     return ($object = unserialize(serialize($object)));
+  }
   return $object;
 }
 
@@ -26,7 +30,6 @@ function SecureSubnetMask($mask)
     return false;
   }
 
-
   $mask = intval($mask);
   if ($mask < 0 || $mask > 32) {
     return false;
@@ -37,21 +40,16 @@ function SecureSubnetMask($mask)
 
 function SecureMACAddress($mac)
 {
-
   return filter_var($mac, FILTER_VALIDATE_MAC);
 }
 
 function SecureNumber($number)
 {
-  return intval($number);
+  return filter_var($number, FILTER_SANITIZE_NUMBER_INT);
 }
 
 function SecureIPAddress($ip)
 {
-  if (strlen($ip) > (3 * 4 + 3) || strlen($ip) == 0) {
-    return false;
-  }
-
   return filter_var($ip, FILTER_VALIDATE_IP);
 }
 
@@ -69,14 +67,4 @@ function PrintMatrix($matr)
     }
     echo "<br>";
   }
-}
-
-function console_log($output, $with_script_tags = true)
-{
-  $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) .
-    ');';
-  if ($with_script_tags) {
-    $js_code = '<script>' . $js_code . '</script>';
-  }
-  echo $js_code;
 }
