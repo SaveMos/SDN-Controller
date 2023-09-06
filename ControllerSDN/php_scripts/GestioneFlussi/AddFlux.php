@@ -20,20 +20,19 @@ $SwitchList = $Controller->SwitchList;
 $num_switch = count($SwitchList);
 
 $Priority = SecureNumber($_POST["priority_flux"]);
-
 $FlowName = SecureTextInput($_POST["flux_name"]);
 
-if($FlowName == ""){
+if ($FlowName == "") {
     $FlowName = "flow-mod-";
-}else{
-    $FlowName = $FlowName."-";
+} else {
+    $FlowName = $FlowName . "-";
 }
 
-if($Priority > 32767){
+if ($Priority > 32767) {
     $Priority = 32767;
 }
 
-if($Priority < 0){
+if ($Priority < 0) {
     $Priority = 0;
 }
 
@@ -68,8 +67,7 @@ $ind = SearchHostByIPAddr($DevList, $src_ip);
 if ($ind < 0) {
     $_SESSION["esito"] = 0;
     $_SESSION["esito_msg"] = "Host Sorgente Inesistente!";
-    header("Location: ModificaFlusso.php ", true, 302);
-    exit();
+    EndProgram();
 } else {
     $Host_Sorgente =  fixObject($DevList[$ind]);
     $Switch_Sorgente = $Host_Sorgente->Get_My_Switch();
@@ -81,24 +79,49 @@ $ind = SearchHostByIPAddr($DevList, $dst_ip);
 if ($ind < 0) {
     $_SESSION["esito"] = 0;
     $_SESSION["esito_msg"] = "Host Destinatario Inesistente!";
-    header("Location: ModificaFlusso.php ", true, 302);
-    exit();
+    EndProgram();
 } else {
     $Host_Destinatario =  fixObject($DevList[$ind]);
     $Switch_Destinatario = $Host_Destinatario->Get_My_Switch();
     $Indice_Switch_Destinatario = Search_Switch($SwitchList, $Switch_Destinatario);
 }
 
-AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice_Switch_Destinatario, $Position, $Host_Sorgente, $Host_Destinatario, $FlowName);
+$k1 = array_search($Indice_Switch_Sorgente, $Position);
+$k2 = array_search($Indice_Switch_Destinatario, $Position);
 
-if ($Bidirezionale == 1) {
-    $Position_Reverse = (is_null($Position)) ? $Position : array_reverse($Position);
-    $FlowName = $FlowName."bidirect-";
-    AggiungiRegola($Controller, $Priority,  $Indice_Switch_Destinatario, $Indice_Switch_Sorgente, $Position_Reverse,  $Host_Destinatario, $Host_Sorgente , $FlowName);
+if (($k1 !== FALSE) || ($k2 !== FALSE)) {
+    if (($k1 !== FALSE) && ($k2 === FALSE)) {
+        $_SESSION["esito"] = 0;
+        $_SESSION["esito_msg"] = "ERRORE: Lo Switch Sorgente è presente nella lista degli 'Switch Obbligati', occorre rimuoverlo!";
+    }
+
+    if (($k1 === FALSE) && ($k2 !== FALSE)) {
+        $_SESSION["esito"] = 0;
+        $_SESSION["esito_msg"] = "ERRORE: Lo Switch Destinatario è presente nella lista degli 'Switch Obbligati', occorre rimuoverlo!";
+    }
+
+    if (($k1 !== FALSE) && ($k2 !== FALSE)) {
+        $_SESSION["esito"] = 0;
+        $_SESSION["esito_msg"] = "ERRORE: Lo Switch Sorgente E lo switch Destinatario sono presenti nella lista degli 'Switch Obbligati', occorre rimuoverli!";
+    }
+
+} else {
+
+    AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice_Switch_Destinatario, $Position, $Host_Sorgente, $Host_Destinatario, $FlowName);
+
+    if ($Bidirezionale == 1) {
+        $Position_Reverse = (is_null($Position)) ? $Position : array_reverse($Position);
+        $FlowName = $FlowName . "bidirect-";
+        AggiungiRegola($Controller, $Priority,  $Indice_Switch_Destinatario, $Indice_Switch_Sorgente, $Position_Reverse,  $Host_Destinatario, $Host_Sorgente, $FlowName);
+    }
 }
 
-header("Location: ModificaFlusso.php ", true, 302);
-exit();
+EndProgram();
+
+?>
+
+<?php
+// Funzioni
 
 function Search_Switch($SwitchList, $dpid)
 {
@@ -116,6 +139,10 @@ function Search_Switch($SwitchList, $dpid)
 
 function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice_Switch_Destinatario, $Position, $Host_Sorgente, $Host_Destinatario, $Prefisso)
 {
+    // echo "Position:"; echo $Indice_Switch_Sorgente. " "; print_r($Position); echo $Indice_Switch_Destinatario. " ";echo "<br>";
+
+
+
     $Path = SPF($Controller->graph, $Indice_Switch_Sorgente, $Indice_Switch_Destinatario, $Position);
 
     $ipv4_src = ($Host_Sorgente->IPv4_Addr);
@@ -133,8 +160,7 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
     if ($Num <= 0) {
         $_SESSION["esito"] = 0;
         $_SESSION["esito_msg"] = "Errore Sconosciuto";
-        header("Location: ModificaFlusso.php ", true, 302);
-        exit();
+        return "fallito";
     }
 
     if ($Num == 1) {
@@ -145,13 +171,12 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
         $out_port = $Host_Destinatario->Get_My_Switch_Port();
 
         $Name = $Prefisso . (rand(1000, 9999)) . $Separatore . (1);
-        
+
         $command = CreaComandoARP($Switch_i->DPID, $Name, $in_port, $out_port, $ipv4_src, $ipv4_dst);
         $res = $Controller->Insert_Flux($command);
 
         $command = CreaComando($Switch_i->DPID, $Name, $Priority, $in_port, $out_port, $ipv4_src, $ipv4_dst);
         $res = $Controller->Insert_Flux($command);
-        //echo "Codice: ".$res."<br>";
     }
 
     if ($Num == 2) {
@@ -172,7 +197,6 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
 
         $command = CreaComando($Switch_i_sorg->DPID, $Name, $Priority, $in_port, $ports[0], $ipv4_src, $ipv4_dst);
         $res = $Controller->Insert_Flux($command);
-        // echo "Codice: ".$res."<br>";
 
         // Secondo Switch
         $Name = $Prefisso . (rand(1000, 9999)) . $Separatore . (2);
@@ -182,7 +206,6 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
 
         $command = CreaComando($Switch_i_dest->DPID, $Name, $Priority, $ports[1], $out_port, $ipv4_src, $ipv4_dst);
         $res = $Controller->Insert_Flux($command);
-       // echo "Codice: ".$res."<br>";
     }
 
     if ($Num >= 3) {
@@ -229,8 +252,6 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
 
             $command = CreaComando($Switch_i->DPID, $Name, $Priority, $ports[0], $ports[1], $ipv4_src, $ipv4_dst);
             $res = $Controller->Insert_Flux($command);
-           // echo "Codice: ".$res."<br>";
-           
         }
     }
 
@@ -240,8 +261,9 @@ function AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice
         $cod = 0;
         $_SESSION["esito_msg"] = "La regola non e' stata inserita! => <br>" . $res . ".";
     }
-  
+
     $_SESSION["esito"] = $cod;
+    return "ok";
 }
 
 function CreaComando($SwitchDPID, $Name, $Priority, $porta_in, $porta_out, $ipv4_src, $ipv4_dst, $Cookie = 0, $Active = true, $Action = "output")
@@ -249,27 +271,27 @@ function CreaComando($SwitchDPID, $Name, $Priority, $porta_in, $porta_out, $ipv4
     $command = array(
         "switch" => $SwitchDPID,
         "name" => $Name,
-    
+
         "eth_type" => "0x0800", // Protocollo IPv4
         "ipv4_src" => ($ipv4_src . "/32"),
         "ipv4_dst" => ($ipv4_dst . "/32"),
-        
+
         "cookie" => $Cookie,
         "priority" => $Priority, // Massima è 32767, minima è 0.
         "in_port" => $porta_in,
         "active" => $Active,
-       
+
         "actions" => ($Action . "=" . $porta_out)
     );
 
     return $command;
 }
 
-function CreaComandoARP($SwitchDPID, $Name, $porta_in , $porta_out, $ipv4_src, $ipv4_dst)
+function CreaComandoARP($SwitchDPID, $Name, $porta_in, $porta_out, $ipv4_src, $ipv4_dst)
 {
     $command = array(
         "switch" => $SwitchDPID,
-        "name" => "ARP-".$Name,
+        "name" => $Name . "-ARP",
 
         "eth_type" => "0x0806", // Pacchetto ARP
         "arp_spa" => ($ipv4_src . "/32"),
@@ -279,8 +301,16 @@ function CreaComandoARP($SwitchDPID, $Name, $porta_in , $porta_out, $ipv4_src, $
         "priority" => 30000,
         "in_port" => $porta_in,
         "active" => true,
-        "actions" => ("output=".$porta_out."")
+        "actions" => ("output=" . $porta_out . "")
     );
     return $command;
 }
 
+function EndProgram()
+{
+   header("Location: ModificaFlusso.php ", true, 302);
+    exit();
+}
+
+
+?>

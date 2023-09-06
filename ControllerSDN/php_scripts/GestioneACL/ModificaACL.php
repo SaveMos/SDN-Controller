@@ -23,10 +23,13 @@
         unset($_SESSION["esito_msg"]);
     }
     ?>
-    <p>
+   <div class="nav_bar_container">
         <a class="option_link" href="../../index.php">Home</a>
+        <span class="option_link_separator">|</span>
         <a class="option_link" href="GestioneACL.html">Gestione ACL</a>
-    </p>
+        <span class="option_link_separator">|</span>
+        <a class="option_link" href="ShowACL.php">Guarda le ACL</a>
+    </div>
     <h1>Inserisci ACL</h1>
 
     <div class="greater_option_cointainer">

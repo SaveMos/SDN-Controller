@@ -44,8 +44,33 @@
     margin-top: 29px;
     display: inline;
     cursor: pointer;
-    margin-bottom: 4%;
+
+    background-color: rgb(30, 112, 30);
+    color: wheat;
+   
 }
+
+
+.nav_bar_container{
+    border: 2.5px dotted gray;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+}
+
+
+.option_link{
+    cursor: pointer;
+    width : 30vh;
+    font-size: 2.6vh;
+    margin-left: 2vh;
+    margin-right: 2vh;
+}
+
+.option_link_separator{
+    font-size: large;
+}
+
 
 .IP_address_input_container{
     margin-top: 1vh;
@@ -66,19 +91,10 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
-#check_box_container_interno{
-    border: 2px dotted black;
-    width: fit-content;
-    height: fit-content;
-    padding: 1%;
-    padding-right: 3%;
-    display: inline-block;
-}
 
-.Switch_CheckBox_label{
-    font-size: medium;
+.Switch_CheckBoxPos{
+    font-size: large;
     font-weight: normal;
-
 }
 
 .info_container{
@@ -96,9 +112,69 @@
     font-style: italic;
 }
 
+.info4{
+    text-decoration: underline;
+    font-weight: 500;
+    font-size: large;
+}
 
 .infoImportante2{
     color: rgb(12, 194, 27);
     font-size: small;
     font-style: italic;
 }
+
+.Switch_CheckBox_label{
+    font-size: large;
+    font-weight: normal;
+}
+
+.Switch_CheckBox_label_Selected{
+    font-size: large;
+    font-weight: bold;
+    color: rgb(19, 116, 27);
+}
+
+.dpid_container{
+    border: 1px solid black;
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: 1vh;
+    padding: 1vh;
+    cursor: move;
+   
+
+}
+
+.dpid_container_dragging{
+    border: 1px solid black;
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: 1vh;
+    padding: 1vh;
+    cursor: move;
+
+    opacity: 35%;
+   
+
+}
+
+.Switch_CheckBox_label_Pos{
+    font-weight:900;
+}
+
+.drag_menu_container {
+    min-width:20vw;
+    width: fit-content;
+    height: fit-content;
+   
+    min-height: 20vh;
+
+    margin: 1vh;
+
+    padding: 1%;
+
+    float: left;
+
+    border: 2px dotted black;
+  }

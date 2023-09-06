@@ -51,6 +51,43 @@
 }
 
 
+.Flux_button {
+    height: fit-content;
+    width: fit-content;
+    font-size: 2.6vh;
+    margin-right: 2vh;
+    margin-top: 29px;
+    display: inline;
+    cursor: pointer;
+
+    background-color: rgb(30, 112, 30);
+    color: wheat;
+   
+}
+
+
+.nav_bar_container{
+    border: 2.5px dotted gray;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+}
+
+
+.option_link{
+    cursor: pointer;
+    width : 30vh;
+    font-size: 2.6vh;
+    margin-left: 2vh;
+    margin-right: 2vh;
+}
+
+.option_link_separator{
+    font-size: large;
+}
+
+
+
 .ACL_button {
     height: fit-content;
     width: fit-content;
