@@ -12,6 +12,7 @@ function Dijkstra($graph, $source, $destination)
 	*/
 
 	// https://codereview.stackexchange.com/questions/75641/dijkstras-algorithm-in-php
+	
 	//the start and the end
 	$a = $source;
 	$b = $destination;
@@ -36,26 +37,16 @@ function Dijkstra($graph, $source, $destination)
 	//list the path
 	$path = array();
 	$pos = $b;
+
 	while ($pos != $a) {
 		$path[] = $pos;
 		$pos = $S[$pos][0];
 	}
+
 	$path[] = $a;
 	$path = array_reverse($path);
 
-	//print result
-	/*
-	echo "<br />Sorgente: $a <br> Destinazione: $b";
-	echo "<br />Lunghezza del Percorso: " . $S[$b][1];
-	echo "<br />Il percorso è [" . implode(' => ', $path) . "] <br><br>";
-	*/
-
 	return $path;
-}
-
-function Print_Path($path , $source , $destination){
-	echo "<br />Sorgente: $source <br> Destinazione: $destination";
-	echo "<br />Il percorso e' [" . implode(' => ', $path) . "] <br><br>";
 }
 
 function SPF($graph, $source, $destination , $Not_Optional_Nodes){
@@ -74,7 +65,6 @@ function SPF($graph, $source, $destination , $Not_Optional_Nodes){
 		3) Dijkstra($graph, b , destination)
 
 	Quindi l'ordine con cui sono inseriti i nodi in $Not_Optional_Nodes NON DEVE ESSERE CASUALE.
-	
 	*/
 
 	$Num_Not_Opt = count($Not_Optional_Nodes);

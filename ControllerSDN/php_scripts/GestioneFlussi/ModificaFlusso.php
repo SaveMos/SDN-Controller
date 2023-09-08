@@ -10,7 +10,7 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width">
-    <link rel="stylesheet" href="../../style/ModificaFlusso.css">
+    <link rel="stylesheet" href="../../style/style.css">
     <script type="text/javascript" src="../../js_scripts/ModificaFlusso.js"></script>
     <title>Configuratore di Flusso</title>
 </head>
@@ -21,9 +21,9 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
 
     if (isset($_SESSION["esito"])) {
         if ($_SESSION["esito"] == 1) {
-            echo "<p class='infoImportante2'> Regola aggiunta con Successo!</p>";
+            echo "<p class='infoImportante infoImportante_Positiva'> Regola aggiunta con Successo!</p>";
         } else {
-            echo "<p class='infoImportante'> Inserimento Regola Fallito! " . $_SESSION["esito_msg"] . "</p>";
+            echo "<p class='infoImportante infoImportante_Negativa'> Inserimento Regola Fallito! " . $_SESSION["esito_msg"] . "</p>";
         }
         unset($_SESSION["esito"]);
         unset($_SESSION["esito_msg"]);
@@ -38,14 +38,14 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
         <span class="option_link_separator">|</span>
         <a class="option_link" href="ShowFlussi.php">Guarda le regole di Flusso</a>
     </div>
-    <h1>Configuratore di Flusso</h1>
+    <h1 class='main_title'>Configuratore di Flusso</h1>
 
     <div class="greater_option_cointainer">
 
         <form action="AddFlux.php" class="option_container" method="post" id="Insert_Flux_Form" name="Insert_Flux_Form">
 
             <div class="input_field_container">
-                <span>Indirizzo IP Sorg:</span>
+                <span class='IP_Addr_Label'>Indirizzo IP Sorg:</span>
                 <div class="IP_address_input_container">
                     <input id="Sorg_IP_Addr_1" name="Sorg_IP_Addr_1" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span>.</span>
@@ -55,10 +55,10 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
                     <span>.</span>
                     <input id="Sorg_IP_Addr_4" name="Sorg_IP_Addr_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                 </div>
-                <span>/ 32</span>
+                <span class='IP_Addr_Label'>/ 32</span>
                 <br>
 
-                <span>Indirizzo IP Dest:</span>
+                <span class='IP_Addr_Label'>Indirizzo IP Dest:</span>
                 <div class="IP_address_input_container">
                     <input id="Dest_IP_Addr_1" name="Dest_IP_Addr_1" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span>.</span>
@@ -68,24 +68,24 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
                     <span>.</span>
                     <input id="Dest_IP_Addr_4" name="Dest_IP_Addr_4" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                 </div>
-                <span>/ 32</span>
+                <span class='IP_Addr_Label'>/ 32</span>
                 <br>
 
             </div>
 
-            <h3 class='info1'>Opzioni</h3>
+            <h3 class='option_voice'>Opzioni</h3>
             <div id="other_option_container">
 
-                <label for='Other_Option_Bidirezionale_check'> Bidirezionale </label>
-                <input class='Other_Option_CheckBox' type='checkbox' id='Other_Option_Bidirezionale_check' name='Other_Option_Bidirezionale_check'>
+                <label class = 'IP_Addr_Label' for='Other_Option_Bidirezionale_check'> Bidirezionale: </label>
+                <input class='IP_Addr_Label' type='checkbox' id='Other_Option_Bidirezionale_check' name='Other_Option_Bidirezionale_check'>
 
                 <br><br>
-                <label for='priority_flux'> Priorità [0 - 32767]</label>
-                <input class='Other_Option_CheckBox' type='number' id='priority_flux' name='priority_flux' value="32767" max="32767" min="0" step="1">
+                <label class = 'IP_Addr_Label' for='priority_flux'> Priorità [0 - 32767]: </label>
+                <input class='IP_Addr_Label' type='number' id='priority_flux' name='priority_flux' value="32767" max="32767" min="0" step="1">
 
                 <br><br>
-                <label for='flux_name'> Nome del Flusso</label>
-                <input class='Other_Option_CheckBox' type='text' id='flux_name' name='flux_name' minlenght="1" maxlenght="50" placeholder="flow-mod">
+                <label class = 'IP_Addr_Label' for='flux_name'> Nome del Flusso: </label>
+                <input class='IP_Addr_Label' type='text' id='flux_name' name='flux_name' minlenght="1" maxlenght="50" placeholder="flow-mod">
             </div>
 
             <input id="insertFluxButton" name="insertFluxButton" class="Flux_button" type="submit" value="Aggiungi Flusso">
@@ -95,17 +95,22 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
                 $Controller = fixObject($_SESSION["Controller"]);
                 $Controller->Update_Controller();
                 $_SESSION["Controller"] = $Controller;
-                echo "<h3 class='info1'>OPZIONALE - Seleziona gli Switch da cui desideri far passare il flusso.</h3>";
-                echo "<div id='info_container'>";
-                echo "<p class='infoImportante'>
-                NOTA BENE! L'ordine con cui selezioni gli switch è importante, 
-                quindi spunta le checkbox degli switch nello stesso ordine con cui vorresti far passare i pacchetti
+                echo "<h3 class='option_voice'>OPZIONALE - Seleziona gli Switch da cui desideri far passare il flusso.</h3>";
+                echo "<div class='info_container'>";
+                echo "<p class='infoImportante infoImportante_Neutra'>
+                ATTENZIONE!
                 </p>";
 
-                echo "<p class='infoImportante'>
-                NOTA BENE! Non selezionare gli switch a cui sono collegati l'host sorgente e/o l'host destinatario dato che verranno automaticamente inclusi nel percorso.
+                echo "<p class='infoImportante infoImportante_Neutra'>
+               Per selezionare: Trascina lo switch desiderato nel blocco 'Switch da Attraversare' e imponi un ordine.
+                </p>";
+
+                echo "<p class='infoImportante infoImportante_Neutra'>
+                Non selezionare gli switch a cui sono collegati l'host sorgente e/o l'host destinatario dato che verranno automaticamente inclusi nel percorso.
                 </p>";
                 echo "</div>";
+
+                echo "<div class='DragMenuContainer'>";
                
                 echo "<div class='drag_menu_container' id='check_box_container_interno_sinistro' >";
                 echo "<p class='info4'> Switch Attualmente Online</p>";
@@ -129,6 +134,8 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
 
                 echo "<div class='drag_menu_container' id='check_box_container_interno_destro'>";
                 echo "<p class='info4'> Switch da Attraversare</p>";
+                echo "</div>";
+
                 echo "</div>";
 
                 echo "<input type='hidden' id='PositionArray' name='PositionArray'>";

@@ -25,7 +25,7 @@ session_start();
         <span class="option_link_separator">|</span>
         <a class="option_link" href="ModificaFlusso.php">Nuova Regola di Flusso</a>
 </div>
-    <h1>Flussi Installati</h1>
+    <h1 class='main_title'>Regole di Flusso Installate</h1>
 
     <div class="general_options_container">
     <?php
@@ -43,7 +43,7 @@ session_start();
             echo "<p class='infoNum'> Sono state installate " . $num_rule . " regole di Flusso. </p>";
         }
 
-        echo "<button class='FlushAll_Button' id='FlushAll' name='FlushAll'> Flush Totale </button> <span> Elimina tutte le regole in tutti gli Switch</span>";
+        echo "<button class='FlushButton FlushAll_Button' id='FlushAll' name='FlushAll'> Flush Totale </button> <span class='infoNum'> Elimina tutte le regole in tutti gli Switch</span>";
     }
     
     ?>
@@ -70,7 +70,7 @@ session_start();
 
             if ($Num_Regole_i > 0) {
 
-                echo "<button class='FlushAll_SwitchButton' id='FlushAll_Switch_" . $i . "' name='" . $dpid . "'> Elimina tutte le regole di " . $dpid . "</button>";
+                echo "<button class='FlushButton FlushAll_SwitchButton' id='FlushAll_Switch_" . $i . "' name='" . $dpid . "'> Elimina tutte le regole di " . $dpid . "</button>";
                 echo "<br>";echo "<br>";
       
                 for ($j = 0; $j < $Num_Regole_i; $j++) {
@@ -79,7 +79,7 @@ session_start();
                     echo "<div class='RuleContainer'>";
                     echo "<form method='post' action='DeleteFlowRules\DeleteSingleFlowRule.php'>";
                     echo "<span class='RuleNumber'>".($j+1)."° Regola</span>";
-                    echo "<button class='FlushSingleRule_Button' type='submit'> Elimina '" . trim($Rule[0]) . "' </button>";
+                    echo "<button class='FlushButton FlushSingleRule_Button' type='submit'> Elimina '" . trim($Rule[0]) . "' </button>";
                     echo "<input type='hidden' id='RuleName' name='RuleName' value = " . trim($Rule[0]) . ">";
                     echo "</form>";
 

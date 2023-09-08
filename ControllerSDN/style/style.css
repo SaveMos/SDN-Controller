@@ -1,5 +1,37 @@
+/*Regole per i campi di Input*/
+.greater_option_cointainer {
+    display: block;
+    width: 95%;
+    height: fit-content;
+    margin-bottom: 500px;
+    font-size: medium;
+}
+
 .input_field_container{
     background-color: wheat;
+    margin-left: 2vh;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    border: 2px dotted black;
+    
+}
+
+.input_single_field_container{
+    margin-left: 2vh;
+    margin-top: 15px;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+}
+
+.input_action_container{
+    margin-left: 2vh;
+    margin-bottom: 2vh;
+    display: inline-block;
+    width: fit-content;
+    font-family: 'Courier New', Courier, monospace;
+
 }
 
 .IP_address_input_container{
@@ -9,14 +41,54 @@
     height: fit-content;
     display: inline-block;
     
-
 }
+
 .IP_Addr_Number_input{ 
     width: fit-content;
     display: inline;
     font-family: 'Courier New', Courier, monospace;
+    font-size: large;
 }
 
+.IP_Addr_Label ,.Num_Rule_Label{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+}
+
+.MAC_Addr_Number_input{ 
+    width: 35vh;
+    display: inline;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.option_container {  
+    width: 100%;
+
+    height: fit-content;
+    min-height: 80px;
+   
+    margin: 2vh;
+}
+
+
+#other_option_container{
+    font-size: medium;
+    border: 2px dotted black;
+    padding: 1vh;
+    margin: 2vh;
+    width: fit-content;
+}
+
+/*Generale*/
+
+.main_title{
+    margin-left: 2vh;
+    font-size: xx-large;
+    text-decoration: underline;
+}
+
+/*Regole per le info, warings ed errori*/
 
 .info0{
     color: rgb(173, 10, 10);
@@ -26,7 +98,6 @@
     text-decoration: underline;
 }
 
-
 .info01{
     color: rgb(12, 194, 27);
     font-size: medium;
@@ -35,7 +106,6 @@
     text-decoration: underline;
 }
 
-
 .info03{
     color: rgb(7, 34, 187);
     font-size: medium;
@@ -43,8 +113,6 @@
     font-family: 'Courier New', Courier, monospace;
     text-decoration: underline;
 }
-
-
 
 .info1{
     color: rgb(173, 10, 10);
@@ -60,17 +128,65 @@
     font-style: italic;
 }
 
-.main_title{
-    font-size: xx-large;
+.info4{
     text-decoration: underline;
+    font-weight: 500;
+    font-size: large;
+    text-align: center;
+}
+
+.infoImportante{
+    font-size: medium;
+    font-style: italic;
+    margin-left: 2vh;
+}
+
+.infoImportante_Negativa{
+    color: rgb(173, 10, 10);
     
 }
+
+.infoImportante_Positiva{
+    color: rgb(12, 194, 27);
+}
+
+.infoNum{
+    font-size: large;
+
+}
+
+.infoImportante_Neutra{
+    color: rgb(24, 2, 221);
+}
+
+
+/*Regole per la Navbar*/
 
 .nav_bar_container{
     border: 2.5px dotted gray;
     width: fit-content;
     height: fit-content;
     text-align: center;
+}
+
+.option_link{
+    cursor: pointer;
+    width : 30vh;
+    font-size: 2.6vh;
+    margin-left: 2vh;
+    margin-right: 2vh;
+}
+
+.option_link_separator{
+    font-size: large;
+}
+
+/*Regole per le 'Opzioni' nell'inserimento dei Flussi*/
+
+.option_voice {
+    width: fit-content;
+    font-size: large;
+    margin-left: 2vh;
 }
 
 .general_options_container{
@@ -86,43 +202,52 @@
     margin-bottom: 2vh;
 }
 
-.option_link{
-    cursor: pointer;
-    width : 30vh;
+
+/*Regole per i Bottoni di Submit*/
+
+.Flux_button , .ACL_button{
+    height: fit-content;
+    width: fit-content;
+
     font-size: 2.6vh;
+
     margin-left: 2vh;
-    margin-right: 2vh;
+    vertical-align: middle;
+
+    display: inline;
+
+    cursor: pointer;
+
+    background-color: rgb(30, 112, 30);
+    color: wheat; 
+    
 }
 
-.option_link_separator{
+/*Regole per i bottoni di Flush*/
+
+.FlushButton{
+    font-family:'Courier New', Courier, monospace;
     font-size: large;
+    border-radius: 50px;
+    border-color: gray;
 }
 
 .FlushSingleRule_Button{
-    font-family:'Courier New', Courier, monospace;
-    font-size: large;
     margin-top: 2vh;
-    margin-bottom: 1vh;
-    border-radius: 50px;
-    border-color: gray;
+    margin-bottom: 1vh;  
 }
 
 .FlushAll_Button{
-    font-family:'Courier New', Courier, monospace;
     background-color: rgb(248, 59, 59);
     font-weight: bold;
-    font-size: large;
-    border-radius: 50px;
-    border-color: gray;
 }
 
 .FlushAll_SwitchButton{
-    font-family:'Courier New', Courier, monospace;
+    
     background-color: rgb(240, 177, 105);
-    font-size: large;
-    border-radius: 50px;
-    border-color: gray;
 }
+
+/*Regole per il N° Rule nelle ACL*/
 
 .RuleNumber{
     font-size: large;
@@ -145,6 +270,80 @@
     border: 2px dotted black;
 }
 
+.Rule_Number_input{
+    width: 7vw;
+    display: inline;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/*Regole per il menù Drag and Drop in Inserimento Flussi*/
+
+.dpid_container{
+    border: 1px solid black;
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: 1vh;
+    padding: 1vh;
+    cursor: move;
+
+    text-align: center;
+
+    display: inline-block;
+}
+
+.Switch_CheckBox_label{
+    font-size: x-large;
+    font-weight: normal;
+}
+
+.dpid_container_dragging{
+    border: 1px solid black;
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: 1vh;
+    padding: 1vh;
+    cursor: move;
+
+    text-align: center;
+
+    display: inline-block;
+
+    opacity: 35%;
+}
+
+.Switch_CheckBox_label_Pos{
+    font-weight:700;
+    color: blue;
+    font-size: x-large;
+}
+
+.drag_menu_container {
+    width:20vw;
+
+    height: fit-content;
+    min-height: 20vh;
+
+    right: 2vh;
+    margin-top: 1vh;
+    margin-right: 1vh;
+
+    padding: 0.5%;
+
+    float: left;
+    border: 2px dotted black;
+
+    text-align: center;
+  }
+
+  .DragMenuContainer{
+    margin-left: 2vh;
+    
+    height: fit-content;
+  }
+
+
+
 .container_switch_rules{
     width: fit-content;
 
@@ -158,9 +357,38 @@
     background-color: rgb(245, 155, 133);
     border: 2px dotted black;
 }
-
 .InfoSwitchFlowRules{
     font-size: large;
 }
 
 
+.input_field_container{
+    background-color: wheat;
+    width: fit-content;
+    padding: 2vh;
+    height: fit-content;
+    display: inline-block;
+}
+
+
+
+.Switch_CheckBoxPos{
+    font-size: large;
+    font-weight: normal;
+}
+
+.info_container{
+    border: 2px dotted black;
+    width: fit-content;
+    height: fit-content;
+    margin-left: 2vh;
+    padding-right: 2%;
+
+}
+
+
+.Switch_CheckBox_label_Selected{
+    font-size: large;
+    font-weight: bold;
+    color: rgb(19, 116, 27);
+}

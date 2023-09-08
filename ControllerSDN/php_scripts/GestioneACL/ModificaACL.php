@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width">
-    <link rel="stylesheet" href="../../style/ModificaACL.css">
+    <link rel="stylesheet" href="../../style/style.css">
     <script src="../../js_scripts/ModificaACL.js"></script>
     <title>Modifica ACL</title>
 </head>
@@ -15,30 +15,28 @@
 
     if (isset($_SESSION["esito"])) {
         if ($_SESSION["esito"] == 1) {
-            echo "<p class='infoImportante2'> " . $_SESSION["esito_msg"] . "</p>";
+            echo "<p class='infoImportante infoImportante_Positiva'> " . $_SESSION["esito_msg"] . "</p>";
         } else {
-            echo "<p class='infoImportante'> " . $_SESSION["esito_msg"] . "</p>";
+            echo "<p class='infoImportante infoImportante_Negativa'> " . $_SESSION["esito_msg"] . "</p>";
         }
         unset($_SESSION["esito"]);
         unset($_SESSION["esito_msg"]);
     }
     ?>
-   <div class="nav_bar_container">
+    <div class="nav_bar_container">
         <a class="option_link" href="../../index.php">Home</a>
         <span class="option_link_separator">|</span>
         <a class="option_link" href="GestioneACL.html">Gestione ACL</a>
         <span class="option_link_separator">|</span>
         <a class="option_link" href="ShowACL.php">Guarda le ACL</a>
     </div>
-    <h1>Inserisci ACL</h1>
+    <h1 class='main_title'>Modifica ACL</h1>
 
     <div class="greater_option_cointainer">
         <p class="option_voice">Inserisci una Regola</p>
         <form action="AddACLRule.php" class="option_container" method="post" id="Insert_ACL_Form" name="Insert_ACL_Form">
-
-
             <div class="input_field_container" id="insert_ACL_IP_container" name="insert_ACL_IP_container">
-                <label>Ind. IP Sorg:</label>
+                <label class='IP_Addr_Label'>Ind. IP Sorg:</label>
                 <div class="IP_address_input_container">
                     <input id="Sorg_IP_Addr_1" name="Sorg_IP_Addr_1" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span>.</span>
@@ -54,7 +52,7 @@
 
                 <br>
 
-                <label>Ind. IP Dest:</label>
+                <label class='IP_Addr_Label'>Ind. IP Dest:</label>
                 <div class="IP_address_input_container">
                     <input id="Dest_IP_Addr_1" name="Dest_IP_Addr_1" class="IP_Addr_Number_input" type="number" value="0" max="255" min="0">
                     <span>.</span>
@@ -87,7 +85,7 @@
             </div>
 
 
-            <input id="insertACLButton" name="insertACLButton" class="ACL_button" type="submit" value="Inserisci">
+            <input id="insertACLButton" name="insertACLButton" class="ACL_button" type="submit" value="Inserisci Regola">
 
         </form>
     </div>
@@ -97,8 +95,9 @@
         <form class="option_container" method="post" action="DeleteACLRules/DeleteSingleACLRule.php">
 
             <div class="input_single_field_container">
-                <label>#Num della Regola da Eliminare: </label>
+
                 <div class="IP_address_input_container">
+                    <label class='Num_Rule_Label' for='Rule_Number_Delete'>#Num della Regola da Eliminare: </label>
                     <input id="Rule_Number_Delete" name="Rule_Number_Delete" class="Rule_Number_input" type="number" value="0" min="0">
                 </div>
             </div>
@@ -106,18 +105,9 @@
         </form>
     </div>
 
-    <div class="greater_option_cointainer">
-        <div class="option_container">
-            <input id="FlushAll" name="FlushAll" class="ACL_button" type="submit" value="Elimina TUTTE le Regole">
-        </div>
-    </div>
 
-    
+    <input id="FlushAll" name="FlushAll" class="ACL_button" type="submit" value="Elimina TUTTE le Regole">
 
 </body>
 
 </html>
-
-<?php
-
-?>
