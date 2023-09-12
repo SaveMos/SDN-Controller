@@ -17,17 +17,22 @@ session_start();
 </head>
 
 <body onload="EventHandler()">
-    <p> <a class="option_link" href="../../index.php">Home</a> </p>
-    <h1>Gestione Firewall</h1>
+    <div class="nav_bar_container">
+        <a class="nav_bar_link" href="../../index.php">Home</a>
+    </div>
+    <h1 class='main_title'>Gestione Firewall</h1>
 
-    <p>Cosa vorresti fare?</p>
+    <p class='option_question'>Cosa vorresti fare?</p>
     <?php
 
     $Controller = $_SESSION["Controller"];
     $Controller = fixObject($Controller);
 
-    
-    $State = 0; $ButtonText = 0; $SpanText = 0; $SpanClass = 0;
+
+    $State = 0;
+    $ButtonText = 0;
+    $SpanText = 0;
+    $SpanClass = 0;
 
     if (($Controller->ShowFirewallState()) == 1) {
         $State = 0;
@@ -44,18 +49,18 @@ session_start();
 
     <form method="post" action="AttivaFirewall.php">
 
-    <?php
-    echo "<input id='FW_Button' name='FW_Button' type='submit' value='".$ButtonText."'>  </input>";
-    echo "<span id='FW_State' class='".$SpanClass."'> ".$SpanText." </span>";
-    echo "<input type='hidden' id='FW_Number_State' name='FW_Number_State' value='" . $State . "'>";
-    ?>
-    
-    </form>
-    <ul>
-        <li> <a class="option_link" href="ModificaFW.php">Inserire una regola nel Firewall</a></li><br>
+        <?php
+        echo "<input id='FW_Button' name='FW_Button' type='submit' value='" . $ButtonText . "'>  </input>";
+        echo "<span id='FW_State' class='" . $SpanClass . "'> " . $SpanText . " </span>";
+        echo "<input type='hidden' id='FW_Number_State' name='FW_Number_State' value='" . $State . "'>";
+        ?>
 
-        <li> <a class="option_link" href="ShowFW.php">Vedere le Regole del Firewall</a></li><br>
-    </ul>
+    </form>
+    <dl class="option_link_list_container">
+        <dt> <a class="option_link" href="ModificaFW.php">Inserire una regola nel Firewall</a></dt><br>
+
+        <dt> <a class="option_link" href="ShowFW.php">Vedere le Regole del Firewall</a></dt><br>
+    </dl>
 
 </body>
 

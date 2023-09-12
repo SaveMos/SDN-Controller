@@ -28,7 +28,6 @@ function EventHandler() {
     Checks.forEach(check => {
         check.addEventListener("drop", drop, false);
         check.addEventListener("dragover", allowDrop_Container, false);
-        //check.addEventListener("focus", Click_Drag_Menu_Container, false);
     });
 
     const container = (document.getElementById("check_box_container_interno_sinistro"));
@@ -38,12 +37,25 @@ function EventHandler() {
     for (let i = 0; i < NodeList.length; i++) {
         Default_Position[i] = NodeList[i].id;
     }
+    /*
+    document.addEventListener("dragover", (event) => {
+        event.preventDefault();
+    });
 
+    document.addEventListener("dragend", (event) => {
+        event.preventDefault();
+    });
+
+    document.addEventListener("drop", (event) => {
+        event.preventDefault();
+    });
+    */
 }
 
 
 function Update_Positions() {
     var container = (document.getElementById("check_box_container_interno_destro"));
+
     var NodeList = container.childNodes;
     var dim = NodeList.length;
     Position = [];
@@ -54,7 +66,7 @@ function Update_Positions() {
 
     if (dim == 1) {
         Position[0] = NodeList[0].id;
-     
+
     }
 
     if (dim > 1) {
@@ -62,28 +74,29 @@ function Update_Positions() {
             Position.push(TrovaIndice(NodeList[i].id, Default_Position) - 1);
         }
     }
-    var NodeList = container.childNodes;
-    var dim = NodeList.length;
+    NodeList = container.childNodes;
+    dim = NodeList.length;
 
-    for(let i = 1; i < dim ; i++){
+    for (let i = 1; i < dim; i++) {
         var el = NodeList[i];
         el = el.firstChild.nextSibling.nextSibling;
-        el.innerHTML = " | "+(i) + "°";
+        el.innerHTML = " | " + (i) + "°";
     }
 
     Position.shift();
     (document.getElementById("PositionArray")).value = JSON.stringify(Position);
     // Carico Position in un campo input per poi passarlo al PHP tramite metodo POST.
 
-    var container = (document.getElementById("check_box_container_interno_sinistro"));
-    var NodeList = container.childNodes;
-    var dim = NodeList.length;
+    container = (document.getElementById("check_box_container_interno_sinistro"));
+    NodeList = container.childNodes;
+    dim = NodeList.length;
 
-    for(let i = 1; i < dim ; i++){
+    for (let i = 1; i < dim; i++) {
         var el = NodeList[i];
         el = el.firstChild.nextSibling.nextSibling;
         el.innerHTML = "";
     }
+
 }
 
 
@@ -96,6 +109,7 @@ var current_drag_container = null;
 var current_element_ahead = null;
 
 function allowDrop_Container() {
+   // console.log("Container " + this.id);
     if (current_drag_container) {
         // Se l'elemento ha cambiato container allora ho uno spostamento di container.
         // mi segno il container di provenienza e quello di arrivo.
@@ -108,20 +122,25 @@ function allowDrop_Container() {
 
 function allowDrop_Element() {
     current_element_ahead = this.id;
-
+    
     // se l'elemento in movimento è sopra un altro elemento allora me lo segno.
 }
 
 function drag() {
-    
-   document.getElementById(this.id).className = "dpid_container_dragging";
+    document.getElementById(this.id).className = "dpid_container_dragging";
+   // console.log("dragging");
+    document.body.style.cursor = "move";
 }
 
 function drop() {
     // scatta al momento del drop
-    //console.log(original_drag_container + "   " + current_drag_container);
+    // console.log(original_drag_container + "   " + current_drag_container);
 
-    document.getElementById(this.id).className ="dpid_container";
+    document.getElementById(this.id).className = "dpid_container";
+    document.body.style.cursor = "auto";
+
+    console.log("Original -> "+original_drag_container);
+    console.log("Current -> "+current_drag_container);
 
     if (current_element_ahead == this.id && original_drag_container != current_drag_container) {
         current_element_ahead = null;
@@ -130,8 +149,10 @@ function drop() {
 
     const element_id = document.getElementById(this.id);
 
+    console.log("Current Element -> "+current_element_ahead);
+
     if (current_element_ahead) {
-       // console.log("drop " + this.id + " sull'elemento " + current_element_ahead);
+        // console.log("drop " + this.id + " sull'elemento " + current_element_ahead);
         const element_target = document.getElementById(current_element_ahead);
 
         if (current_element_ahead == this.id && original_drag_container == current_drag_container) {

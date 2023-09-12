@@ -86,35 +86,37 @@ if ($ind < 0) {
     $Indice_Switch_Destinatario = Search_Switch($SwitchList, $Switch_Destinatario);
 }
 
-$k1 = array_search($Indice_Switch_Sorgente, $Position);
-$k2 = array_search($Indice_Switch_Destinatario, $Position);
+if (count($Position) > 0) {
 
-if (($k1 !== FALSE) || ($k2 !== FALSE)) {
-    if (($k1 !== FALSE) && ($k2 === FALSE)) {
-        $_SESSION["esito"] = 0;
-        $_SESSION["esito_msg"] = "ERRORE: Lo Switch Sorgente è presente nella lista degli 'Switch Obbligati', occorre rimuoverlo!";
-    }
+    $k1 = array_search($Indice_Switch_Sorgente, $Position);
+    $k2 = array_search($Indice_Switch_Destinatario, $Position);
 
-    if (($k1 === FALSE) && ($k2 !== FALSE)) {
-        $_SESSION["esito"] = 0;
-        $_SESSION["esito_msg"] = "ERRORE: Lo Switch Destinatario è presente nella lista degli 'Switch Obbligati', occorre rimuoverlo!";
-    }
+    if (($k1 !== FALSE) || ($k2 !== FALSE)) {
+        if (($k1 !== FALSE) && ($k2 === FALSE)) {
+            $_SESSION["esito"] = 0;
+            $_SESSION["esito_msg"] = "ERRORE: Lo Switch Sorgente è presente nella lista degli 'Switch Obbligati', occorre rimuoverlo!";
+        }
 
-    if (($k1 !== FALSE) && ($k2 !== FALSE)) {
-        $_SESSION["esito"] = 0;
-        $_SESSION["esito_msg"] = "ERRORE: Lo Switch Sorgente E lo switch Destinatario sono presenti nella lista degli 'Switch Obbligati', occorre rimuoverli!";
-    }
+        if (($k1 === FALSE) && ($k2 !== FALSE)) {
+            $_SESSION["esito"] = 0;
+            $_SESSION["esito_msg"] = "ERRORE: Lo Switch Destinatario è presente nella lista degli 'Switch Obbligati', occorre rimuoverlo!";
+        }
 
-} else {
-
-    AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice_Switch_Destinatario, $Position, $Host_Sorgente, $Host_Destinatario, $FlowName);
-
-    if ($Bidirezionale == 1) {
-        $Position_Reverse = (is_null($Position)) ? $Position : array_reverse($Position);
-        $FlowName = $FlowName . "bidirect-";
-        AggiungiRegola($Controller, $Priority,  $Indice_Switch_Destinatario, $Indice_Switch_Sorgente, $Position_Reverse,  $Host_Destinatario, $Host_Sorgente, $FlowName);
+        if (($k1 !== FALSE) && ($k2 !== FALSE)) {
+            $_SESSION["esito"] = 0;
+            $_SESSION["esito_msg"] = "ERRORE: Lo Switch Sorgente E lo switch Destinatario sono presenti nella lista degli 'Switch Obbligati', occorre rimuoverli!";
+        }
+        EndProgram();
     }
 }
+AggiungiRegola($Controller, $Priority, $Indice_Switch_Sorgente, $Indice_Switch_Destinatario, $Position, $Host_Sorgente, $Host_Destinatario, $FlowName);
+
+if ($Bidirezionale == 1) {
+    $Position_Reverse = (is_null($Position)) ? $Position : array_reverse($Position);
+    $FlowName = $FlowName . "bidirect-";
+    AggiungiRegola($Controller, $Priority,  $Indice_Switch_Destinatario, $Indice_Switch_Sorgente, $Position_Reverse,  $Host_Destinatario, $Host_Sorgente, $FlowName);
+}
+
 
 EndProgram();
 
@@ -308,7 +310,7 @@ function CreaComandoARP($SwitchDPID, $Name, $porta_in, $porta_out, $ipv4_src, $i
 
 function EndProgram()
 {
-   header("Location: ModificaFlusso.php ", true, 302);
+    header("Location: ModificaFlusso.php ", true, 302);
     exit();
 }
 

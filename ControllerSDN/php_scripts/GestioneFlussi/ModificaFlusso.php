@@ -32,11 +32,11 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
 
     
     <div class="nav_bar_container">
-        <a class="option_link" href="../../index.php">Home</a>
+        <a class="nav_bar_link" href="../../index.php">Home</a>
         <span class="option_link_separator">|</span>
-        <a class="option_link" href="GestioneFlussi.html">Gestione Flussi</a>
+        <a class="nav_bar_link" href="GestioneFlussi.html">Gestione Flussi</a>
         <span class="option_link_separator">|</span>
-        <a class="option_link" href="ShowFlussi.php">Guarda le regole di Flusso</a>
+        <a class="nav_bar_link" href="ShowFlussi.php">Guarda le regole di flusso</a>
     </div>
     <h1 class='main_title'>Configuratore di Flusso</h1>
 
@@ -95,7 +95,7 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
                 $Controller = fixObject($_SESSION["Controller"]);
                 $Controller->Update_Controller();
                 $_SESSION["Controller"] = $Controller;
-                echo "<h3 class='option_voice'>OPZIONALE - Seleziona gli Switch da cui desideri far passare il flusso.</h3>";
+                echo "<h3 class='option_voice'>OPZIONALE - Seleziona gli switch da cui desideri far passare il flusso.</h3>";
                 echo "<div class='info_container'>";
                 echo "<p class='infoImportante infoImportante_Neutra'>
                 ATTENZIONE!
@@ -119,15 +119,10 @@ require_once("../../librerie_php/Algoritmi_Vari.php");
 
                 for ($i = 0; $i < $num_switch; $i++) {
                     $s_i = fixObject($SwitchList[$i]);
-
-                  //  echo " <input class = 'Switch_CheckBox' type='checkbox' id='switch_check$i' name='switch_check$i'> ";
-                  //echo " <label id='switch_checkLab$i' name='switch_checkLab$i' class='Switch_CheckBox_label'>" . $s_i->DPID . "</label> ";
                     echo "<div id='switch_DPID_div_$i' name='switch_DPID_div_$i' draggable='true' class='dpid_container'>";
-                 
                     echo "<span id='switch_checkLab$i' name='switch_checkLab$i' class='Switch_CheckBox_label'>" . $s_i->DPID . "</span> ";
                     echo "<span id='switch_checkLabPos$i' name='switch_checkLabPos$i' class='Switch_CheckBox_label_Pos'>  </span> ";
-                    echo "</div>";
-                   // echo " <span class = 'Switch_CheckBoxPos' id='switch_checkPos$i' name='switch_checkPos$i' >-</span>";
+                    echo "</div>";          
                 }
 
                 echo "</div>";

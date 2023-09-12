@@ -19,11 +19,11 @@ session_start();
 <body onload="EventHandler()">
 
 <div class="nav_bar_container">
-        <a class="option_link" href="../../index.php">Home</a>
+        <a class="nav_bar_link" href="../../index.php">Home</a>
         <span class="option_link_separator">|</span>
-        <a class="option_link" href="GestioneFlussi.html">Gestione Flussi</a>
+        <a class="nav_bar_link" href="GestioneFlussi.html">Gestione Flussi</a>
         <span class="option_link_separator">|</span>
-        <a class="option_link" href="ModificaFlusso.php">Nuova Regola di Flusso</a>
+        <a class="nav_bar_link" href="ModificaFlusso.php">Nuova Regola di Flusso</a>
 </div>
     <h1 class='main_title'>Regole di Flusso Installate</h1>
 

@@ -71,7 +71,7 @@ if (
 
 <body>
 
-    <h1>Configuratore del Controllore SDN</h1>
+    <h1 class='main_title'>Configuratore del Controllore SDN</h1>
 
     <form method="post" id="Insert_IP_Address_Form" name="Insert_IP_Address_Form">
         <label>Seleziona l'indirizzo IP del Controllore SDN:</label>
@@ -85,17 +85,17 @@ if (
         <input id="insertFluxButton" name="insertFluxButton" class="Flux_button" type="submit" value="Conferma">
     </form>
 
-    <p>Cosa vorresti fare?</p>
+    <p class='option_question'>Cosa vorresti fare?</p>
 
-    <ul>
+    <dl class="option_link_list_container">
 
-        <li> <a class="option_link" href="php_scripts\GestioneFlussi\GestioneFlussi.html">Gestione Regole di Flusso</a></li> <br>
+        <dt> <a class="option_link" href="php_scripts\GestioneFlussi\GestioneFlussi.html">Gestione delle Regole di Flusso</a></dt> <br>
 
-        <li> <a class="option_link" href="php_scripts\GestioneACL\GestioneACL.html">Gestione ACL</a> </li> <br>
+        <dt> <a class="option_link" href="php_scripts\GestioneACL\GestioneACL.html">Gestione ACL</a> </dt> <br>
 
-        <li> <a class="option_link" href="php_scripts\GestioneFW\GestioneFW.php">Gestione Firewall</a> </li> <br>
+        <dt> <a class="option_link" href="php_scripts\GestioneFW\GestioneFW.php">Gestione del Firewall</a> </dt> <br>
 
-    </ul>
+    </dl>
 
 
 </body>
@@ -113,10 +113,11 @@ if (
         ||  isset($_POST["Controller_IP_Addr_4"])
     )
 ) {
-    echo "<br>########################### INFO ########################### <br><br>";
-
-    echo "<p> Il Controllore SDN e' online => ";
-    echo "<span class='info01'> IP: " . $CONTROLLER_IP . "</span>";
+    echo "<div class='online_info_container'>";
+    echo "<br>########################### INFO ###########################<br><br>";
+    
+    echo "<p> Il Controllore SDN è online => ";
+    echo "<span class='info_controller_online'> IP: " . $CONTROLLER_IP . "</span>";
     echo "</p>";
 
     echo "<ul>";
@@ -127,6 +128,7 @@ if (
     echo "<li class='GeneralInformation'> Sono stati rilevati <span class='info03'>" . $Controller->getNumber_Of_InterSwitch_Links() . "</span> collegamenti tra Switch. </li>";
     echo "</ul>";
     echo "<br>############################################################ <br><br>";
+    echo "</div>";
 }
 
 

@@ -1,4 +1,5 @@
 /*Regole per i campi di Input*/
+
 .greater_option_cointainer {
     display: block;
     width: 95%;
@@ -7,17 +8,27 @@
     font-size: medium;
 }
 
-.input_field_container{
+#Insert_IP_Address_Form{
+    background-color: wheat;
+    width: fit-content;
+    height: fit-content;
+    padding: 1vh 2vh 0.5vh 2vh;
+    margin-left: 2vh;
+    border: 2px dotted rgb(70, 69, 69);
+}
+
+.input_field_container {
     background-color: wheat;
     margin-left: 2vh;
     display: inline-block;
     width: fit-content;
     height: fit-content;
     border: 2px dotted black;
-    
+    padding: 1vh;
+
 }
 
-.input_single_field_container{
+.input_single_field_container {
     margin-left: 2vh;
     margin-top: 15px;
     display: inline-block;
@@ -25,7 +36,7 @@
     height: fit-content;
 }
 
-.input_action_container{
+.input_action_container {
     margin-left: 2vh;
     margin-bottom: 2vh;
     display: inline-block;
@@ -34,55 +45,59 @@
 
 }
 
-.IP_address_input_container{
-    margin-top: 2vh;
+.IP_address_input_container {
     margin-left: 2vh;
     width: fit-content;
     height: fit-content;
     display: inline-block;
-    
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+
 }
 
-.IP_Addr_Number_input{ 
+.IP_Addr_Number_input {
     width: fit-content;
     display: inline;
     font-family: 'Courier New', Courier, monospace;
     font-size: large;
 }
 
-.IP_Addr_Label ,.Num_Rule_Label{
+.IP_Addr_Label,
+.Num_Rule_Label {
     font-family: 'Courier New', Courier, monospace;
     font-size: large;
 }
 
-.MAC_Addr_Number_input{ 
+.MAC_Addr_Number_input {
     width: 35vh;
     display: inline;
     font-size: large;
     font-family: 'Courier New', Courier, monospace;
 }
 
-.option_container {  
+.option_container {
     width: 100%;
 
     height: fit-content;
     min-height: 80px;
-   
+
     margin: 2vh;
 }
 
 
-#other_option_container{
+#other_option_container {
     font-size: medium;
     border: 2px dotted black;
     padding: 1vh;
     margin: 2vh;
+    
     width: fit-content;
+    background-color: wheat;
 }
 
 /*Generale*/
 
-.main_title{
+.main_title {
     margin-left: 2vh;
     font-size: xx-large;
     text-decoration: underline;
@@ -90,7 +105,7 @@
 
 /*Regole per le info, warings ed errori*/
 
-.info0{
+.info0 {
     color: rgb(173, 10, 10);
     font-size: medium;
     font-style: italic;
@@ -98,7 +113,7 @@
     text-decoration: underline;
 }
 
-.info01{
+.info01 {
     color: rgb(12, 194, 27);
     font-size: medium;
     font-weight: bold;
@@ -106,7 +121,7 @@
     text-decoration: underline;
 }
 
-.info03{
+.info03 {
     color: rgb(7, 34, 187);
     font-size: medium;
     font-weight: bold;
@@ -114,7 +129,7 @@
     text-decoration: underline;
 }
 
-.info1{
+.info1 {
     color: rgb(173, 10, 10);
     font-size: medium;
     font-style: italic;
@@ -122,64 +137,111 @@
     text-decoration: underline;
 }
 
-.info2{
+.info2 {
     color: rgb(12, 194, 27);
     font-size: small;
     font-style: italic;
 }
 
-.info4{
-    text-decoration: underline;
-    font-weight: 500;
-    font-size: large;
-    text-align: center;
-}
 
-.infoImportante{
+.infoImportante {
     font-size: medium;
     font-style: italic;
     margin-left: 2vh;
 }
 
-.infoImportante_Negativa{
+.infoImportante_Negativa {
     color: rgb(173, 10, 10);
-    
+
 }
 
-.infoImportante_Positiva{
+.infoImportante_Positiva {
     color: rgb(12, 194, 27);
 }
 
-.infoNum{
+.infoNum {
     font-size: large;
 
 }
 
-.infoImportante_Neutra{
+.infoImportante_Neutra {
     color: rgb(24, 2, 221);
 }
 
 
 /*Regole per la Navbar*/
 
-.nav_bar_container{
-    border: 2.5px dotted gray;
+.nav_bar_container {
+    border: 1px dotted rgb(70, 69, 69);
     width: fit-content;
     height: fit-content;
-    text-align: center;
-}
 
-.option_link{
-    cursor: pointer;
-    width : 30vh;
-    font-size: 2.6vh;
+    vertical-align: middle;
     margin-left: 2vh;
-    margin-right: 2vh;
+
+    background-color: wheat;
 }
 
-.option_link_separator{
-    font-size: large;
+.nav_bar_link {
+    cursor: pointer;
+
+    width: fit-content;
+    height: fit-content;
+
+    margin: 0.5vh 1vw 0.5vh 1vw;
+    padding: 1vh 0.5vw 1vh 0.5vw;
+
+    display: inline-block;
+
+    font-size: x-large;
+    font-weight: 400;
+    text-decoration: none;
+
+    color: wheat;
+    background-color: green;
+
+    text-align: center;
+    border: 1px dotted rgb(70, 69, 69);
 }
+
+
+.option_link_separator {
+    font-size: large;
+    color: green;
+}
+
+.option_link_list_container{
+    background-color: wheat;
+    width: fit-content;
+    height: fit-content;
+    padding: 2vh 2vh 0.5vh 2vh;
+    margin-left: 2vh;
+    border: 2px dotted rgb(70, 69, 69);
+
+}
+
+.option_link {
+    cursor: pointer;
+    width: fit-content;
+    font-size: x-large;
+
+    color: wheat;
+    background-color: rgb(31, 128, 31);
+    text-decoration: none;
+    margin-left: 2vh;
+
+    border: 2px dotted rgb(70, 69, 69);
+
+    display: inline-block;
+
+    padding: 1vh 0.5vw 1vh 0.5vw;
+}
+
+.option_question {
+    font-size: large;
+    margin-left: 2vh;
+}
+
 
 /*Regole per le 'Opzioni' nell'inserimento dei Flussi*/
 
@@ -189,11 +251,11 @@
     margin-left: 2vh;
 }
 
-.general_options_container{
+.general_options_container {
     border: 2.5px dotted gray;
     background-color: wheat;
     width: fit-content;
-    
+
     padding-right: 2vh;
     padding-left: 2vh;
     padding-bottom: 2vh;
@@ -205,7 +267,8 @@
 
 /*Regole per i Bottoni di Submit*/
 
-.Flux_button , .ACL_button{
+.Flux_button,
+.ACL_button {
     height: fit-content;
     width: fit-content;
 
@@ -219,37 +282,37 @@
     cursor: pointer;
 
     background-color: rgb(30, 112, 30);
-    color: wheat; 
-    
+    color: wheat;
+
 }
 
 /*Regole per i bottoni di Flush*/
 
-.FlushButton{
-    font-family:'Courier New', Courier, monospace;
+.FlushButton {
+    font-family: 'Courier New', Courier, monospace;
     font-size: large;
     border-radius: 50px;
     border-color: gray;
 }
 
-.FlushSingleRule_Button{
+.FlushSingleRule_Button {
     margin-top: 2vh;
-    margin-bottom: 1vh;  
+    margin-bottom: 1vh;
 }
 
-.FlushAll_Button{
+.FlushAll_Button {
     background-color: rgb(248, 59, 59);
     font-weight: bold;
 }
 
-.FlushAll_SwitchButton{
-    
+.FlushAll_SwitchButton {
+
     background-color: rgb(240, 177, 105);
 }
 
 /*Regole per il N° Rule nelle ACL*/
 
-.RuleNumber{
+.RuleNumber {
     font-size: large;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
@@ -257,7 +320,7 @@
     margin-top: 2vh;
 }
 
-.RuleContainer{
+.RuleContainer {
     width: fit-content;
     height: fit-content;
     display: inline-block;
@@ -270,7 +333,7 @@
     border: 2px dotted black;
 }
 
-.Rule_Number_input{
+.Rule_Number_input {
     width: 7vw;
     display: inline;
     font-size: large;
@@ -279,47 +342,72 @@
 
 /*Regole per il menù Drag and Drop in Inserimento Flussi*/
 
-.dpid_container{
+.info4 {
+    text-decoration: underline;
+    font-weight: 500;
+    font-size: 22px;
+    text-align: center;
+}
+
+.dpid_container {
     border: 1px solid black;
     width: fit-content;
+
     height: fit-content;
     margin-bottom: 1vh;
     padding: 1vh;
-    cursor: move;
+
+    cursor: grab;
 
     text-align: center;
 
     display: inline-block;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgb(240, 237, 233);
 }
 
-.Switch_CheckBox_label{
+.dpid_container:grabbing{
+    cursor: move;
+}
+
+.Switch_CheckBox_label {
     font-size: x-large;
     font-weight: normal;
 }
 
-.dpid_container_dragging{
+
+.dpid_container_dragging {
     border: 1px solid black;
     width: fit-content;
+
     height: fit-content;
     margin-bottom: 1vh;
     padding: 1vh;
-    cursor: move;
+
+    cursor: grabbing;
 
     text-align: center;
 
     display: inline-block;
 
+    align-items: center;
+    justify-content: center;
+
     opacity: 35%;
 }
 
-.Switch_CheckBox_label_Pos{
-    font-weight:700;
+.Switch_CheckBox_label_Pos {
+    font-weight: 700;
     color: blue;
     font-size: x-large;
 }
 
 .drag_menu_container {
-    width:20vw;
+    min-width: 260px;
+    width: 20vw;
 
     height: fit-content;
     min-height: 20vh;
@@ -333,18 +421,22 @@
     float: left;
     border: 2px dotted black;
 
+    cursor: auto;
+
     text-align: center;
-  }
+    align-items: center;
+    justify-content: center;
 
-  .DragMenuContainer{
+    background-color: wheat;
+}
+
+.DragMenuContainer {
     margin-left: 2vh;
-    
     height: fit-content;
-  }
+    
+}
 
-
-
-.container_switch_rules{
+.container_switch_rules {
     width: fit-content;
 
     min-width: 50vw;
@@ -357,12 +449,13 @@
     background-color: rgb(245, 155, 133);
     border: 2px dotted black;
 }
-.InfoSwitchFlowRules{
+
+.InfoSwitchFlowRules {
     font-size: large;
 }
 
 
-.input_field_container{
+.input_field_container {
     background-color: wheat;
     width: fit-content;
     padding: 2vh;
@@ -371,24 +464,45 @@
 }
 
 
-
-.Switch_CheckBoxPos{
+.Switch_CheckBoxPos {
     font-size: large;
     font-weight: normal;
 }
 
-.info_container{
+.info_container {
     border: 2px dotted black;
-    width: fit-content;
+    width: 40.6vw;
+    min-width: 530px;
     height: fit-content;
     margin-left: 2vh;
     padding-right: 2%;
+    cursor: auto;
+
+    background-color: wheat;
+    word-wrap: break-word;
 
 }
 
 
-.Switch_CheckBox_label_Selected{
+.Switch_CheckBox_label_Selected {
     font-size: large;
     font-weight: bold;
     color: rgb(19, 116, 27);
+}
+
+.online_info_container{
+    background-color: wheat;
+    width: fit-content;
+    height: fit-content;
+    padding: 1vh 2vh 0.5vh 2vh;
+    margin-left: 2vh;
+    border: 2px dotted rgb(70, 69, 69);
+}
+
+.info_controller_online{
+    color: rgb(13, 109, 21);
+    font-size: medium;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: underline;
 }
